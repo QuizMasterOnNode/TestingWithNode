@@ -2,18 +2,13 @@
 
 <head>
     <title>Time</title>
-    <link rel="stylesheet" href="/style.css">
-    <script src="/script.js"></script>
+    <link rel="stylesheet" type= "text/css" href="app/css/style.css"/>
+    <script src="app/js/functions.js"></script>
 </head>
 
 <body>
-    <script>
-        const date = new Date();
-        const hours = (date.getHours() % 12) + 1; // London is UTC + 1hr;
-    </script>
-    <p>In London, the clock strikes:
-        <span id="bongs">${"BONG ".repeat(hours)}</span></p>
-    <button onClick="refresh(this)">Refresh</button>
+    <p>MONGO DB DATA: <br></br>
+        <div id="mongoData"></div>
+    </p>
 </body>
-
 </html>

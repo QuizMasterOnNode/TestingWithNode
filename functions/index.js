@@ -1,11 +1,13 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const app = express();
-const {MongoClient, Db} = require('mongodb'); //added
+const path = require("path");
+const {MongoClient, Db} = require('mongodb');
 
 const uri = "mongodb+srv://QuizMaster:QuizMasterPass@cluster0.jm17e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
-app.use(express.static(__dirname + "/static"));
+app.use(express.static(path.join(__dirname, "static")));
+
 async function main(){
     //const uri = "mongodb+srv://QuizMaster:QuizMasterPass@cluster0.jm17e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
@@ -89,8 +91,10 @@ app.get("/api", (req, res) => {
 
 app.get("/mongo", (req, res) => {
     findOneListingByName(client, "quizzes").then(function (result) {
-        return res.send(`${JSON.stringify(result)}`);
+        res.type('application/json');
+        res.send(`${JSON.stringify(result)}`);
     });
 });
+
 // https request
 exports.app = functions.https.onRequest(app);
