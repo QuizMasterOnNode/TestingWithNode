@@ -4,7 +4,7 @@ const app = express();
 const path = require("path");
 const {MongoClient, Db} = require('mongodb');
 
-const uri = "mongodb+srv://QuizMaster:QuizMasterPass@cluster0.jm17e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = "mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 app.use(express.static(path.join(__dirname, "static")));
 
@@ -28,7 +28,7 @@ async function main(){
         //     bathrooms:1
         // })
 
-        await findOneListingByName(client, "quizzes");
+        await findOneListingByName(client, "HST01");
 
     }catch(e){
         console.error(e);
@@ -49,14 +49,14 @@ async function listDatabases(client){
 
 // CREATE (create listing)
 async function createListing(client, newListing){
-    const result = await client.db("Quizzes").collection("Quiz").insertOne(newListing);
+    const result = await client.db("Quiz-Capstone").collection("Quiz").insertOne(newListing);
 
     console.log(`New listing created with the following id: ${result.insertedId}`);
 }
 
 // READ (find listing)
 async function findOneListingByName(client, nameOfListing){
-    const result = await client.db("Quizzes").collection("Quiz").findOne({name:
+    const result = await client.db("Quiz-Capstone").collection("Quiz").findOne({quizName:
     nameOfListing});
 
     if(result){
@@ -90,7 +90,7 @@ app.get("/api", (req, res) => {
 });
 
 app.get("/mongo", (req, res) => {
-    findOneListingByName(client, "quizzes").then(function (result) {
+    findOneListingByName(client, "HST01").then(function (result) {
         res.type('application/json');
         res.send(`${JSON.stringify(result)}`);
     });
