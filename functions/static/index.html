@@ -1,5 +1,4 @@
 <!doctype html>
-
 <head>
     <title>Time</title>
     <link rel="stylesheet" type= "text/css" href="app/css/style.css"/>
@@ -10,5 +9,149 @@
     <p>MONGO DB DATA: <br></br>
         <div id="mongoData"></div>
     </p>
+
+    <form class="sign-up">
+        <!-- email section containing label and input -->
+        <div class="email-section">
+            <label for="email">Email:</label>
+            <input type="email" name="email" size="29" >
+            <br/>
+        </div>
+        <!-- password section containing label and input -->
+        <div class="password-section">
+            <label for="password">Password:</label>
+            <input type="password" name="password" size="25" >
+            <br/>
+        </div>
+        <button class = "sign-up-button">sign up</button>
+        
+    </form>
+
+    <!-- Sign in form -->
+    <form class="log-in">
+        <!-- email section containing label and input -->
+        <div class="email-section">
+            <label for="email">Email:</label>
+            <input type="email" name="email" size="29" >
+            <br/>
+        </div>
+        <!-- password section containing label and input -->
+        <div class="password-section">
+            <label for="password">Password:</label>
+            <input type="password" name="password" size="25" >
+            <br/>
+        </div>
+        <button class = "sign-in">sign in</button>
+    </form>
+
+    <button class="sign-out">Sign out</button>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            signOut,
+            signInWithEmailAndPassword,
+            onAuthStateChanged,
+        } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCZ9kbsSse3GhBojutVCRvTZq2iVUK3xHA",
+          authDomain: "testingwithnode.firebaseapp.com",
+          projectId: "testingwithnode",
+          storageBucket: "testingwithnode.appspot.com",
+          messagingSenderId: "1028278565411",
+          appId: "1:1028278565411:web:a242ad515deb3ec276cf96"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        console.log("WORKED!@#!@#!@#!@#!@#!@#");
+        // init services
+        const db = getFirestore();
+        const auth = getAuth();
+
+        //signing users up (Automatically logs user in as soon as he/she signs in)
+        if (document.querySelector(".sign-up")) {
+            const signupForm = document.querySelector(".sign-up");
+            signupForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const email = signupForm.email.value;
+                const password = signupForm.password.value;
+
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((cred) => {
+                        alert("user created and signed in");
+                        console.log("user created:", cred.user);
+                        signupForm.reset();
+                        //window.location.href = "./index.html";
+                    })
+                    .catch((err) => {
+                        alert(err.message);
+                    });
+            });
+        } else {
+            //console.log("This page does not contain sing-up class, or not in sign up page") ;
+        }
+
+        //logging out
+        setTimeout(() => {
+            const logoutButton = document.querySelector(".sign-out");
+            logoutButton.addEventListener("click", () => {
+                signOut(auth)
+                    .then(() => {
+                        alert("signed out");
+                        console.log("user signed out");
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
+            });
+        }, 2000);
+
+        // logging in
+        if (document.querySelector(".log-in")) {
+            const loginForm = document.querySelector(".log-in");
+            loginForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const email = loginForm.email.value;
+                const password = loginForm.password.value;
+
+                signInWithEmailAndPassword(auth, email, password)
+                    .then((cred) => {
+                        alert("logged in");
+                        console.log("user logged in:", cred.user);
+                        loginForm.reset();
+                        //window.location.href = "./index.html";
+                    })
+                    .catch((err) => {
+                        console.log(err.message);
+                    });
+            });
+        } else {
+            //console.log("This page does not contain login class, or not in sign in page");
+        }
+
+        // Tracks whether user is logged in or not (tracks state).
+        setTimeout(() => {
+            onAuthStateChanged(auth, (user) => {
+                console.log("user status changed:, ", user);
+                // if (user) {
+                //     // Will set up the menu bar options.
+                //     setupUserUI(user);
+                // } else {
+                //     setupUserUI(null);
+                // }
+            });
+        }, 150);
+        console.log("WORKED!@#!@#!@#!@#!@#!@#");
+      </script>
 </body>
 </html>
