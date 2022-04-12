@@ -1,0 +1,82 @@
+{
+    "quizName": "science1",
+    "quizQuestions": {
+        "q1": {
+            "question": "All members of all species in a certain area is an",
+            "options": [
+                "ecosystem",
+                "biosphere",
+                "community",
+                "population",
+                "family"
+                ],
+            "answer": "community"
+        },
+        "q2": {
+            "question": "What do Histologists study?",
+            "options": [
+                "cells",
+                "organs",
+                "tissues",
+                "plants",
+                "history"
+                ],
+            "answer": "tissues"
+        },
+        "q3": {
+            "question": "What form of reproduction are offspring identical to each other and to the parent?",
+            "options": [
+                "sexual",
+                "asexual",
+                "homozygous",
+                "mitosis",
+                "heterozygous"
+                ],
+            "answer": "asexual"
+        },
+        "q4": {
+            "question": "The prefix bio- refers to?",
+            "options": [
+                "life",
+                "study of",
+                "earth",
+                "tissues",
+                "heat"
+                ],
+            "answer": "life"
+        },
+        "q5": {
+            "question": "Organs are two or more _________ coming together to perform a function.",
+            "options": [
+                "organs",
+                "cells",
+                "atoms",
+                "macromolecules",
+                "tissues"
+                ],
+            "answer": "tissues"
+        },
+        "q6": {
+            "question": "What is the smallest unit of life?",
+            "options": [
+                "atoms",
+                "DNA",
+                "molecules",
+                "elements",
+                "cells"
+                ],
+            "answer": "cells"
+        },
+        "q7": {
+            "question": "What is the study of cells called?",
+            "options": [
+                "histology",
+                "mycology",
+                "cytology",
+                "cellology",
+                "bacteriology"
+                ],
+            "answer": "cytology"
+        }
+    }
+}

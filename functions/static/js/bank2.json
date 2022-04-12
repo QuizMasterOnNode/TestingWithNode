@@ -1,0 +1,47 @@
+
+{
+"quizName" : "quiz3",
+"quizQuestions" : [
+		{
+			"q1" :{
+				"question" : "C++ supports object-oriented programming.",
+				"options" : ["True", "False"],
+				"answer" : "True"
+			},
+			"q2" : {
+				"question" : "Which language is an interpreted programming language?",
+				"options" : [ "Python", "C++", "C#", "HTML"],
+				"answer" : "Python"
+			
+			},
+			"q3" : {
+				"question" : "Which of these are NOT a data type?",
+				"options" : ["int", "letter", "char", "boolean"],
+				"answer" : "letter"
+			},			
+			"q4" : {
+				"question" : "Which one of these is a  compiled programming language?",
+				"options" : ["CSS","Swift", "C", "JavaScript"],
+				"answer" : "C"
+			
+			},			
+			"q5" : {
+				"question" : "What is a reserved word?",
+				"options" : ["A word that cannot be used in the language", "A word that should be used sparingly", "A word with a fixed meaning", "None of these"],
+				"answer" : "A word with a fixed meaning"
+			
+			},		
+			"q6" : {
+				"question" : "Visual Basis is a common IDE.",
+				"options" : ["True", "False"],
+				"answer" : "False"
+			
+			},			
+			"q7" : {
+				"question" : "What does syntax refer to?",
+				"options" : ["Errors of the logic in the code", "Indenting for visually pleasing code", "The standard of commenting inside the code", "The set of rules that define the structure of the language"],
+				"answer" : "The set of rules that define the structure of the language"
+			
+			}
+		}
+	]
