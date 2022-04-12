@@ -72,7 +72,7 @@ async function findOneListingByName(client, nameOfListing){
 main().catch(console.error);
 
 // NODE ROUTES:
-app.get("/", (req, res) => {
+app.get("/home", (req, res) => {
     res.sendFile(__dirname + "/static/index.html");
 });
 
