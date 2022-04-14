@@ -1,5 +1,7 @@
 {
     "quizName": "science1",
+    "description": "This covers areas of biology.",
+    "totalPoints": 35,
     "quizQuestions": {
         "q1": {
             "question": "All members of all species in a certain area is an",
@@ -10,7 +12,8 @@
                 "population",
                 "family"
                 ],
-            "answer": "community"
+            "answer": "community",
+            "points": 5
         },
         "q2": {
             "question": "What do Histologists study?",
@@ -21,7 +24,8 @@
                 "plants",
                 "history"
                 ],
-            "answer": "tissues"
+            "answer": "tissues",
+            "points": 5
         },
         "q3": {
             "question": "What form of reproduction are offspring identical to each other and to the parent?",
@@ -32,7 +36,8 @@
                 "mitosis",
                 "heterozygous"
                 ],
-            "answer": "asexual"
+            "answer": "asexual",
+            "points": 5
         },
         "q4": {
             "question": "The prefix bio- refers to?",
@@ -43,7 +48,8 @@
                 "tissues",
                 "heat"
                 ],
-            "answer": "life"
+            "answer": "life",
+            "points": 5
         },
         "q5": {
             "question": "Organs are two or more _________ coming together to perform a function.",
@@ -54,7 +60,8 @@
                 "macromolecules",
                 "tissues"
                 ],
-            "answer": "tissues"
+            "answer": "tissues",
+            "points": 5
         },
         "q6": {
             "question": "What is the smallest unit of life?",
@@ -65,7 +72,8 @@
                 "elements",
                 "cells"
                 ],
-            "answer": "cells"
+            "answer": "cells",
+            "points": 5
         },
         "q7": {
             "question": "What is the study of cells called?",
@@ -76,7 +84,8 @@
                 "cellology",
                 "bacteriology"
                 ],
-            "answer": "cytology"
+            "answer": "cytology",
+            "points": 5
         }
     }
 }
