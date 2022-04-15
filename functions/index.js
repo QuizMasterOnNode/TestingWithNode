@@ -2,25 +2,26 @@ const functions = require("firebase-functions");
 const express = require("express");
 const app = express();
 const path = require("path");
-const {MongoClient, Db} = require('mongodb');
+const { MongoClient, Db } = require("mongodb");
 
-const uri = "mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri =
+    "mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 app.use(express.static(path.join(__dirname, "static")));
 
-async function main(){
+async function main() {
     //const uri = "mongodb+srv://QuizMaster:QuizMasterPass@cluster0.jm17e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
     //const client = new MongoClient(uri);
 
-    try{
+    try {
         // Will connect to database as soon as user enters the site.
         await client.connect();
 
         // gets list of databases.
         //await listDatabases(client);
 
-        // Creating listing, calling function to create list. 
+        // Creating listing, calling function to create list.
         // await createListing(client, {
         //     name:"Lovely Loft",
         //     summary: "A charming loft in paris",
@@ -29,8 +30,7 @@ async function main(){
         // })
 
         await findOneListingByName(client, "HST01");
-
-    }catch(e){
+    } catch (e) {
         console.error(e);
     } finally {
         //await client.close();
@@ -38,32 +38,40 @@ async function main(){
 }
 
 // console logging the databases inside of the MongoDB database.
-async function listDatabases(client){
+async function listDatabases(client) {
     const databasesList = await client.db().admin().listDatabases();
     console.log("Databases:");
-    databasesList.databases.forEach(db => {
+    databasesList.databases.forEach((db) => {
         console.log(`- ${db.name}`);
-    })
+    });
 }
 
-
 // CREATE (create listing)
-async function createListing(client, newListing){
-    const result = await client.db("Quiz-Capstone").collection("Quiz").insertOne(newListing);
+async function createListing(client, newListing) {
+    const result = await client
+        .db("Quiz-Capstone")
+        .collection("Quiz")
+        .insertOne(newListing);
 
-    console.log(`New listing created with the following id: ${result.insertedId}`);
+    console.log(
+        `New listing created with the following id: ${result.insertedId}`
+    );
 }
 
 // READ (find listing)
-async function findOneListingByName(client, nameOfListing){
-    const result = await client.db("Quiz-Capstone").collection("Quiz").findOne({quizName:
-    nameOfListing});
+async function findOneListingByName(client, nameOfListing) {
+    const result = await client
+        .db("Quiz-Capstone")
+        .collection("Quiz")
+        .findOne({ quizName: nameOfListing });
 
-    if(result){
-        console.log(`Found a listing in the collection with the name '${nameOfListing}'`);
+    if (result) {
+        console.log(
+            `Found a listing in the collection with the name '${nameOfListing}'`
+        );
         console.log(result);
         return result;
-    }else {
+    } else {
         console.log(`No listings found with the name '${nameOfListing}'`);
     }
 }
@@ -89,9 +97,30 @@ app.get("/api", (req, res) => {
     res.json({ bongs: "BONG ".repeat(hours) });
 });
 
-app.get("/mongo", (req, res) => {
-    findOneListingByName(client, "HST01").then(function (result) {
-        res.type('application/json');
+app.get("/HST01", (req, res) => {
+    findOneListingByName(client, "HST01").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
+app.get("/SCI01", (req, res) => {
+    findOneListingByName(client, "SCI01").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
+app.get("/MEC01", (req, res) => {
+    findOneListingByName(client, "MEC01").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
+app.get("/CIS01", (req, res) => {
+    findOneListingByName(client, "CIS01").then(function(result) {
+        res.type("application/json");
         res.send(`${JSON.stringify(result)}`);
     });
 });

@@ -72,6 +72,7 @@ a {
     margin adjusted to account for nav bar.
 */
 
+
 /* #siteHeading {
     background-color: #388087;
     text-align: center;
@@ -93,13 +94,12 @@ a {
     /*Adjusted to account for menu bar size.*/
     text-align: center;
     color: #388087;
-    padding:  15px 15px;
+    padding: 15px 15px;
 }
- #pageHeading p {
-        font-size: 18px;
-       
-} 
 
+#pageHeading p {
+    font-size: 18px;
+}
 
 #siteBody {
     min-height: 100%;
@@ -202,6 +202,7 @@ a {
 }
 
 #quizHeading h1 {
+    color: #388087;
     text-align: left;
     padding-bottom: 20px;
     text-decoration: underline;

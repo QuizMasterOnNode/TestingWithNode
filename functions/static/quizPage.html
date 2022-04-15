@@ -8,7 +8,229 @@
 </head>
 
 <body>
-    <p>This is a quiz holding page.</p>
+    <div id="sample_quiz_wrapper">
+        <!--header being referenced by jQuery to open up header html-->
+        <div id="header"></div>
+
+        <!--siteHeading div controls the title of the webpage.-->
+        <div id="pageHeading">
+            <h1>Quiz Master</h1>
+        </div>
+
+        <!--The menu bar and the main content of the page are stored in a container div.
+            This helps ensure a column style layout.-->
+        <div id="pageElements"></div>
+
+        <!--Menu bar to go in this space.-->
+        <!--id main-menu is referenced by jquery to load the menu bar.-->
+        <div id="main-menu"></div>
+        <div id="quiz">
+            <div id="quizHeading">
+                <h1 id="quizHeading1"></h1>
+            </div>
+
+            <div id="questions">
+                <form action="">
+                    <div id="question1">
+                        <h4>Question 1</h4>
+                        <br />
+                        <p id="q1"></p>
+                        <br />
+                        <input type="radio" id="q1Opt1" name="q1Options" value="1" />
+                        <label id="q1Option1"></label><br />
+                        <input type="radio" id="q1Opt2" name="q1Options" value="2" />
+                        <label id="q1Option2"></label><br />
+                        <input type="radio" id="q1Opt3" name="q1Options" value="3" />
+                        <label id="q1Option3"></label><br />
+                        <input type="radio" id="q1Opt4" name="q1Options" value="4" />
+                        <label id="q1Option4"></label>
+                    </div>
+
+                    <div id="question2">
+                        <h4>Question 2</h4>
+                        <br />
+                        <p id="q2"></p>
+                        <br />
+                        <input type="radio" id="q2Opt1" name="q2Options" value="1" />
+                        <label id="q2Option1"></label><br />
+                        <input type="radio" id="q2Opt2" name="q2Options" value="2" />
+                        <label id="q2Option2"></label><br />
+                        <input type="radio" id="q2Opt3" name="q2Options" value="3" />
+                        <label id="q2Option3"></label><br />
+                        <input type="radio" id="q2Opt4" name="q2Options" value="4" />
+                        <label id="q2Option4"></label>
+                    </div>
+
+                    <div id="question3">
+                        <h4>Question 3</h4>
+                        <br />
+                        <p id="q3"></p>
+                        <br />
+                        <input type="radio" id="q3Opt1" name="q3Options" value="1" />
+                        <label id="q3Option1"></label><br />
+                        <input type="radio" id="q3Opt2" name="q3Options" value="2" />
+                        <label id="q3Option2"></label><br />
+                        <input type="radio" id="q3Opt3" name="q3Options" value="3" />
+                        <label id="q3Option3"></label><br />
+                        <input type="radio" id="q3Opt4" name="q3Options" value="4" />
+                        <label id="q3Option4"></label>
+                    </div>
+
+                    <div id="question4">
+                        <h4>Question 4</h4>
+                        <br />
+                        <p id="q4"></p>
+                        <br />
+                        <input type="radio" id="q4Opt1" name="q4Options" value="1" />
+                        <label id="q4Option1"></label><br />
+                        <input type="radio" id="q4Opt2" name="q4Options" value="2" />
+                        <label id="q4Option2"></label><br />
+                        <input type="radio" id="q4Opt3" name="q4Options" value="3" />
+                        <label id="q4Option3"></label><br />
+                        <input type="radio" id="q4Opt4" name="q4Options" value="4" />
+                        <label id="q4Option4"></label>
+                    </div>
+
+                    <div id="question5">
+                        <h4>Question 5</h4>
+                        <br />
+                        <p id="q5"></p>
+                        <br />
+                        <input type="radio" id="q5Opt1" name="q5Options" value="1" />
+                        <label id="q5Option1"></label><br />
+                        <input type="radio" id="q5Opt2" name="q5Options" value="2" />
+                        <label id="q5Option2"></label><br />
+                        <input type="radio" id="q5Opt3" name="q5Options" value="3" />
+                        <label id="q5Option3"></label><br />
+                        <input type="radio" id="q5Opt4" name="q5Options" value="4" />
+                        <label id="q5Option4"></label>
+                    </div>
+
+                    <div id="question6">
+                        <h4>Question 6</h4>
+                        <br />
+                        <p id="q6"></p>
+                        <br />
+                        <input type="radio" id="q6Opt1" name="q6Options" value="1" />
+                        <label id="q6Option1"></label><br />
+                        <input type="radio" id="q6Opt2" name="q6Options" value="2" />
+                        <label id="q6Option2"></label><br />
+                        <input type="radio" id="q6Opt3" name="q6Options" value="3" />
+                        <label id="q6Option3"></label><br />
+                        <input type="radio" id="q6Opt4" name="q6Options" value="4" />
+                        <label id="q6Option4"></label>
+                    </div>
+
+                    <div id="question7">
+                        <h4>Question 7</h4>
+                        <br />
+                        <p id="q7"></p>
+                        <br />
+                        <input type="radio" id="q7Opt1" name="q7Options" value="1" />
+                        <label id="q7Option1"></label><br />
+                        <input type="radio" id="q7Opt2" name="q7Options" value="2" />
+                        <label id="q7Option2"></label><br />
+                        <input type="radio" id="q7Opt3" name="q7Options" value="3" />
+                        <label id="q7Option3"></label><br />
+                        <input type="radio" id="q7Opt4" name="q7Options" value="4" />
+                        <label id="q7Option4"></label>
+                    </div>
+
+                    <div id="question8">
+                        <h4>Question 8</h4>
+                        <br />
+                        <p id="q8"></p>
+                        <br />
+                        <input type="radio" id="q8Opt1" name="q8Options" value="1" />
+                        <label id="q8Option1"></label><br />
+                        <input type="radio" id="q8Opt2" name="q8Options" value="2" />
+                        <label id="q8Option2"></label><br />
+                        <input type="radio" id="q8Opt3" name="q8Options" value="3" />
+                        <label id="q8Option3"></label><br />
+                        <input type="radio" id="q8Opt4" name="q8Options" value="4" />
+                        <label id="q8Option4"></label>
+                    </div>
+
+                    <div id="question9">
+                        <h4>Question 9</h4>
+                        <br />
+                        <p id="q9"></p>
+                        <br />
+                        <input type="radio" id="q9Opt1" name="q9Options" value="1" />
+                        <label id="q9Option1"></label><br />
+                        <input type="radio" id="q9Opt2" name="q9Options" value="2" />
+                        <label id="q9Option2"></label><br />
+                        <input type="radio" id="q9Opt3" name="q9Options" value="3" />
+                        <label id="q9Option3"></label><br />
+                        <input type="radio" id="q9Opt4" name="q9Options" value="4" />
+                        <label id="q9Option4"></label>
+                    </div>
+
+                    <div id="question10">
+                        <h4>Question 10</h4>
+                        <br />
+                        <p id="q10"></p>
+                        <br />
+                        <input type="radio" id="q10Opt1" name="q10Options" value="1" />
+                        <label id="q10Option1"></label><br />
+                        <input type="radio" id="q10Opt2" name="q10Options" value="2" />
+                        <label id="q10Option2"></label><br />
+                        <input type="radio" id="q10Opt3" name="q10Options" value="3" />
+                        <label id="q10Option3"></label><br />
+                        <input type="radio" id="q10Opt4" name="q10Options" value="4" />
+                        <label id="q10Option4"></label>
+                    </div>
+
+                    <div id="submit_button">
+                        <button>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- <script>
+            fetch("./js/computerScience.json")
+                .then((response) => response.json())
+                .then((data) => {
+                    document.querySelector("#question1").innerHTML +=
+                        data.quizQuestions.q1.question;
+                    document.querySelector("#question1").innerHTML +=
+                        "<br><br>" + "Options: " + data.quizQuestions.q1.options;
+                    document.querySelector("#question2").innerHTML +=
+                        data.quizQuestions.q2.question;
+                    document.querySelector("#question2").innerHTML +=
+                        "<br><br>" + "Options: " + data.quizQuestions.q2.options;
+                    document.querySelector("#question3").innerHTML +=
+                        data.quizQuestions.q3.question;
+                    document.querySelector("#question3").innerHTML +=
+                        "<br><br>" + "Options: " + data.quizQuestions.q3.options;
+                    document.querySelector("#question4").innerHTML +=
+                        data.quizQuestions.q4.question;
+                    document.querySelector("#question4").innerHTML +=
+                        "<br><br>" + "Options: " + data.quizQuestions.q4.options;
+                    document.querySelector("#question5").innerHTML +=
+                        data.quizQuestions.q5.question;
+                    document.querySelector("#question5").innerHTML +=
+                        "<br><br>" + "Options: " + data.quizQuestions.q5.options;
+                    document.querySelector("#question6").innerHTML +=
+                        data.quizQuestions.q6.question;
+                    document.querySelector("#question6").innerHTML +=
+                        "<br><br>" + "Options: " + data.quizQuestions.q6.options;
+                    document.querySelector("#question7").innerHTML +=
+                        data.quizQuestions.q7.question;
+                    document.querySelector("#question7").innerHTML +=
+                        "<br><br>" + "Options: " + data.quizQuestions.q7.options;
+                });
+        </script> -->
+    </div>
+
+    <!--Footer being referenced by jQuery to open up footer html-->
+    <div id="footer"></div>
+    <!--jQuery source file-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!--JavaScript project file-->
+    <script type="module" src="js/script.js"></script>
+    <script type="module" src="js/functions.js"></script>
+    <script type="module" src="js/authentication.js"></script>
 </body>
 
 </html>
