@@ -28,7 +28,7 @@ async function main(){
         //     bathrooms:1
         // })
 
-        await findOneListingByName(client, "HST01");
+        //await findOneListingByName(client, "HST01");
 
     }catch(e){
         console.error(e);
@@ -48,8 +48,8 @@ async function listDatabases(client){
 
 
 // CREATE (create listing)
-async function createListing(client, newListing){
-    const result = await client.db("Quiz-Capstone").collection("Quiz").insertOne(newListing);
+async function createUserListing(client, newListing){
+    const result = await client.db("Quiz-Capstone").collection("students").insertOne(newListing);
 
     console.log(`New listing created with the following id: ${result.insertedId}`);
 }
@@ -94,6 +94,12 @@ app.get("/mongo", (req, res) => {
         res.type('application/json');
         res.send(`${JSON.stringify(result)}`);
     });
+});
+
+// Create a user route to create user listing
+app.get("/user", (req, res) => {
+    const user_email = req.query.email;
+    createUserListing(client, {user:user_email});
 });
 
 // https request
