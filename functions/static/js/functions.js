@@ -43,34 +43,6 @@ async function fetchCIS01() {
     return responseMongo;
 }
 
-// // call back function from fetchMongoData (necessary for async functions)/
-// fetchHST01().then(function(result) {
-//     if (btnHistory1) {
-//         btnHistory1.addEventListener("click", function() {
-//             let confirmAction = confirm("You're about to take a quiz.");
-//             if (confirmAction) {
-//                 let quizPage = window.open("quizPage.html");
-//                 quizPage.addEventListener("DOMContentLoaded", () => {
-//                     // Now we can access elements on the quiz page
-//                     quizPage.document.getElementById("quizHeading1").innerHTML =
-//                         result.category + " - " + result.quizName;
-//                     for (let i = 0; i <= 10; i++) {
-//                         quizPage.document.getElementById("q" + (i + 1)).innerHTML =
-//                             result.quizQuestions[i].question;
-//                         for (let j = 0; j <= 3; j++) {
-//                             quizPage.document.getElementById(
-//                                 "q" + (i + 1) + "Option" + (j + 1)
-//                             ).innerHTML = result.quizQuestions[i].options[j];
-//                         }
-//                     }
-//                 });
-//             } else {
-//                 alert("Action canceled");
-//             }
-//         });
-//     }
-// });
-
 if (btnHistory1) {
     // call back function from fetchMongoData (necessary for async functions)/
     fetchHST01().then(function(result) {
@@ -94,15 +66,68 @@ if (btnHistory1) {
                     // Now we can access elements on the quiz page
                     quizPage.document.getElementById("quizHeading1").innerHTML =
                         result.category + " - " + result.quizName;
-                    for (let i = 0; i <= 10; i++) {
-                        quizPage.document.getElementById("q" + (i + 1)).innerHTML =
-                            result.quizQuestions[i].question;
-                        for (let j = 0; j <= 3; j++) {
-                            quizPage.document.getElementById(
-                                "q" + (i + 1) + "Option" + (j + 1)
-                            ).innerHTML = result.quizQuestions[i].options[j];
+                    var questionCount = Object.keys(result.quizQuestions).length;
+                    var quizForm = document.createElement("form");
+                    quizForm.id = "quizForm";
+                    quizPage.document.getElementById("questions").appendChild(quizForm);
+                    for (let i = 0; i < questionCount; i++) {
+                        var questionHeading = document.createElement("h4");
+                        questionHeading.id = "questionHeading";
+                        questionHeading.innerHTML = "Question" + " " + (i + 1);
+                        var question = document.createElement("div");
+                        question.id = "question" + (i + 1);
+                        var newline2 = document.createElement("br");
+                        var newline4 = document.createElement("br");
+                        var ptag = document.createElement("p");
+                        var questionText = document.createTextNode(
+                            result.quizQuestions[i].question
+                        );
+                        ptag.appendChild(questionText);
+                        question.appendChild(questionHeading);
+                        question.appendChild(newline4);
+                        question.appendChild(ptag);
+                        question.appendChild(newline2);
+                        quizPage.document.getElementById("quizForm").appendChild(question);
+
+                        var optionCount = Object.keys(
+                            result.quizQuestions[i].options
+                        ).length;
+                        var options = document.createElement("div");
+                        options.id = "question" + (i + 1) + "Options";
+                        for (let j = 0; j < optionCount; j++) {
+                            var radiobox = document.createElement("input");
+                            radiobox.type = "radio";
+                            radiobox.id = "q" + (i + 1) + "Option" + (j + 1);
+                            radiobox.name = "q" + (i + 1) + "Options";
+                            radiobox.value = i + 1;
+
+                            var label = document.createElement("label");
+                            label.htmlFor = "q" + (i + 1) + "Option" + (j + 1);
+
+                            var option = document.createTextNode(
+                                " " + result.quizQuestions[i].options[j]
+                            );
+                            label.appendChild(option);
+
+                            var newline = document.createElement("br");
+                            var newline3 = document.createElement("br");
+
+                            options.appendChild(radiobox);
+                            options.appendChild(label);
+                            options.appendChild(newline);
+                            options.appendChild(newline3);
+
+                            quizPage.document
+                                .getElementById("question" + (i + 1))
+                                .appendChild(options);
                         }
                     }
+                    var sbDiv = document.createElement("div");
+                    sbDiv.id = "submit_button";
+                    var submitButton = document.createElement("button");
+                    submitButton.innerHTML = "Submit";
+                    sbDiv.appendChild(submitButton);
+                    quizPage.document.getElementById("quizForm").appendChild(sbDiv);
                 });
                 modal.style.display = "none";
             });
@@ -136,15 +161,68 @@ if (btnScience1) {
                     // Now we can access elements on the quiz page
                     quizPage.document.getElementById("quizHeading1").innerHTML =
                         result.category + " - " + result.quizName;
-                    for (let i = 0; i <= 10; i++) {
-                        quizPage.document.getElementById("q" + (i + 1)).innerHTML =
-                            result.quizQuestions[i].question;
-                        for (let j = 0; j <= 3; j++) {
-                            quizPage.document.getElementById(
-                                "q" + (i + 1) + "Option" + (j + 1)
-                            ).innerHTML = result.quizQuestions[i].options[j];
+                    var questionCount = Object.keys(result.quizQuestions).length;
+                    var quizForm = document.createElement("form");
+                    quizForm.id = "quizForm";
+                    quizPage.document.getElementById("questions").appendChild(quizForm);
+                    for (let i = 0; i < questionCount; i++) {
+                        var questionHeading = document.createElement("h4");
+                        questionHeading.id = "questionHeading";
+                        questionHeading.innerHTML = "Question" + " " + (i + 1);
+                        var question = document.createElement("div");
+                        question.id = "question" + (i + 1);
+                        var newline2 = document.createElement("br");
+                        var newline4 = document.createElement("br");
+                        var ptag = document.createElement("p");
+                        var questionText = document.createTextNode(
+                            result.quizQuestions[i].question
+                        );
+                        ptag.appendChild(questionText);
+                        question.appendChild(questionHeading);
+                        question.appendChild(newline4);
+                        question.appendChild(ptag);
+                        question.appendChild(newline2);
+                        quizPage.document.getElementById("quizForm").appendChild(question);
+
+                        var optionCount = Object.keys(
+                            result.quizQuestions[i].options
+                        ).length;
+                        var options = document.createElement("div");
+                        options.id = "question" + (i + 1) + "Options";
+                        for (let j = 0; j < optionCount; j++) {
+                            var radiobox = document.createElement("input");
+                            radiobox.type = "radio";
+                            radiobox.id = "q" + (i + 1) + "Option" + (j + 1);
+                            radiobox.name = "q" + (i + 1) + "Options";
+                            radiobox.value = i + 1;
+
+                            var label = document.createElement("label");
+                            label.htmlFor = "q" + (i + 1) + "Option" + (j + 1);
+
+                            var option = document.createTextNode(
+                                " " + result.quizQuestions[i].options[j]
+                            );
+                            label.appendChild(option);
+
+                            var newline = document.createElement("br");
+                            var newline3 = document.createElement("br");
+
+                            options.appendChild(radiobox);
+                            options.appendChild(label);
+                            options.appendChild(newline);
+                            options.appendChild(newline3);
+
+                            quizPage.document
+                                .getElementById("question" + (i + 1))
+                                .appendChild(options);
                         }
                     }
+                    var sbDiv = document.createElement("div");
+                    sbDiv.id = "submit_button";
+                    var submitButton = document.createElement("button");
+                    submitButton.innerHTML = "Submit";
+                    sbDiv.appendChild(submitButton);
+                    quizPage.document.getElementById("quizForm").appendChild(sbDiv);
                 });
                 modal.style.display = "none";
             });
@@ -178,19 +256,72 @@ if (btnScience2) {
                     // Now we can access elements on the quiz page
                     quizPage.document.getElementById("quizHeading1").innerHTML =
                         result.category + " - " + result.quizName;
-                    for (let i = 0; i <= 10; i++) {
-                        quizPage.document.getElementById("q" + (i + 1)).innerHTML =
-                            result.quizQuestions[i].question;
-                        for (let j = 0; j <= 3; j++) {
-                            quizPage.document.getElementById(
-                                "q" + (i + 1) + "Option" + (j + 1)
-                            ).innerHTML = result.quizQuestions[i].options[j];
+                    var questionCount = Object.keys(result.quizQuestions).length;
+                    var quizForm = document.createElement("form");
+                    quizForm.id = "quizForm";
+                    quizPage.document.getElementById("questions").appendChild(quizForm);
+                    for (let i = 0; i < questionCount; i++) {
+                        var questionHeading = document.createElement("h4");
+                        questionHeading.id = "questionHeading";
+                        questionHeading.innerHTML = "Question" + " " + (i + 1);
+                        var question = document.createElement("div");
+                        question.id = "question" + (i + 1);
+                        var newline2 = document.createElement("br");
+                        var newline4 = document.createElement("br");
+                        var ptag = document.createElement("p");
+                        var questionText = document.createTextNode(
+                            result.quizQuestions[i].question
+                        );
+                        ptag.appendChild(questionText);
+                        question.appendChild(questionHeading);
+                        question.appendChild(newline4);
+                        question.appendChild(ptag);
+                        question.appendChild(newline2);
+                        quizPage.document.getElementById("quizForm").appendChild(question);
+
+                        var optionCount = Object.keys(
+                            result.quizQuestions[i].options
+                        ).length;
+                        var options = document.createElement("div");
+                        options.id = "question" + (i + 1) + "Options";
+                        for (let j = 0; j < optionCount; j++) {
+                            var radiobox = document.createElement("input");
+                            radiobox.type = "radio";
+                            radiobox.id = "q" + (i + 1) + "Option" + (j + 1);
+                            radiobox.name = "q" + (i + 1) + "Options";
+                            radiobox.value = i + 1;
+
+                            var label = document.createElement("label");
+                            label.htmlFor = "q" + (i + 1) + "Option" + (j + 1);
+
+                            var option = document.createTextNode(
+                                " " + result.quizQuestions[i].options[j]
+                            );
+                            label.appendChild(option);
+
+                            var newline = document.createElement("br");
+                            var newline3 = document.createElement("br");
+
+                            options.appendChild(radiobox);
+                            options.appendChild(label);
+                            options.appendChild(newline);
+                            options.appendChild(newline3);
+
+                            quizPage.document
+                                .getElementById("question" + (i + 1))
+                                .appendChild(options);
                         }
                     }
+                    var sbDiv = document.createElement("div");
+                    sbDiv.id = "submit_button";
+                    var submitButton = document.createElement("button");
+                    submitButton.innerHTML = "Submit";
+                    sbDiv.appendChild(submitButton);
+                    quizPage.document.getElementById("quizForm").appendChild(sbDiv);
                 });
                 modal.style.display = "none";
             });
-            btnCancel2.addEventListener("click", function() {
+            btnCancel1.addEventListener("click", function() {
                 modal.style.display = "none";
             });
         });
@@ -220,15 +351,68 @@ if (btnEngineering1) {
                     // Now we can access elements on the quiz page
                     quizPage.document.getElementById("quizHeading1").innerHTML =
                         result.category + " - " + result.quizName;
-                    for (let i = 0; i <= 10; i++) {
-                        quizPage.document.getElementById("q" + (i + 1)).innerHTML =
-                            result.quizQuestions[i].question;
-                        for (let j = 0; j <= 3; j++) {
-                            quizPage.document.getElementById(
-                                "q" + (i + 1) + "Option" + (j + 1)
-                            ).innerHTML = result.quizQuestions[i].options[j];
+                    var questionCount = Object.keys(result.quizQuestions).length;
+                    var quizForm = document.createElement("form");
+                    quizForm.id = "quizForm";
+                    quizPage.document.getElementById("questions").appendChild(quizForm);
+                    for (let i = 0; i < questionCount; i++) {
+                        var questionHeading = document.createElement("h4");
+                        questionHeading.id = "questionHeading";
+                        questionHeading.innerHTML = "Question" + " " + (i + 1);
+                        var question = document.createElement("div");
+                        question.id = "question" + (i + 1);
+                        var newline2 = document.createElement("br");
+                        var newline4 = document.createElement("br");
+                        var ptag = document.createElement("p");
+                        var questionText = document.createTextNode(
+                            result.quizQuestions[i].question
+                        );
+                        ptag.appendChild(questionText);
+                        question.appendChild(questionHeading);
+                        question.appendChild(newline4);
+                        question.appendChild(ptag);
+                        question.appendChild(newline2);
+                        quizPage.document.getElementById("quizForm").appendChild(question);
+
+                        var optionCount = Object.keys(
+                            result.quizQuestions[i].options
+                        ).length;
+                        var options = document.createElement("div");
+                        options.id = "question" + (i + 1) + "Options";
+                        for (let j = 0; j < optionCount; j++) {
+                            var radiobox = document.createElement("input");
+                            radiobox.type = "radio";
+                            radiobox.id = "q" + (i + 1) + "Option" + (j + 1);
+                            radiobox.name = "q" + (i + 1) + "Options";
+                            radiobox.value = i + 1;
+
+                            var label = document.createElement("label");
+                            label.htmlFor = "q" + (i + 1) + "Option" + (j + 1);
+
+                            var option = document.createTextNode(
+                                " " + result.quizQuestions[i].options[j]
+                            );
+                            label.appendChild(option);
+
+                            var newline = document.createElement("br");
+                            var newline3 = document.createElement("br");
+
+                            options.appendChild(radiobox);
+                            options.appendChild(label);
+                            options.appendChild(newline);
+                            options.appendChild(newline3);
+
+                            quizPage.document
+                                .getElementById("question" + (i + 1))
+                                .appendChild(options);
                         }
                     }
+                    var sbDiv = document.createElement("div");
+                    sbDiv.id = "submit_button";
+                    var submitButton = document.createElement("button");
+                    submitButton.innerHTML = "Submit";
+                    sbDiv.appendChild(submitButton);
+                    quizPage.document.getElementById("quizForm").appendChild(sbDiv);
                 });
                 modal.style.display = "none";
             });

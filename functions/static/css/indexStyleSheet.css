@@ -257,6 +257,10 @@ a {
     border-radius: 10px;
 }
 
+#questionHeading {
+    text-decoration: underline;
+}
+
 
 /*Cleared of all floats to cover bottom portion of screen. Block display allows link and text on one line.
     Adjusted margin to account for menu bar.
