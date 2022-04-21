@@ -15,7 +15,7 @@
     <script type="text/javascript" src="./js/script.js"></script>
 </head>
 
-<body>
+<body onload="addQuizzes()">
     <div id="wrapper">
         <!--siteHeading div controls the title of the webpage.-->
         <div id="header"></div>
@@ -55,11 +55,13 @@
 
         <div id="quizList">
             <div id="quizBox">
-                <h4>History Quiz 1</h4>
-                <p>This is a history quiz description.</p>
-                <p></p>
-                <p>Questions: 7</p>
-                <p>Maximum Points: 24 Points</p>
+            <div id="HST01">
+                <!--history 1 quiz data-->
+                <h4 id="title"></h4>
+                <p id="description"></p>
+                <p id="numQuestions"></p>
+                <p id="totalPoints"></p>
+                
                 <p>Time Limit: None</p>
                 <p>Attempts: Unlimited</p>
                 <div id="startButton">
@@ -67,6 +69,7 @@
                     <button id="btnHistory1" name="start" type="button">Start</button>
                 </div>
             </div>
+        </div>
             <div id="quizBox">
                 <h4>History Quiz 2</h4>
                 <p>This is a history quiz description.</p>

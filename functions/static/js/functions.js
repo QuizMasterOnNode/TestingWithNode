@@ -11,10 +11,9 @@
 // });
 
 let btnScience1 = document.getElementById("btnScience1");
-let btnScience2 = document.getElementById("btnScience2");
 let btnHistory1 = document.getElementById("btnHistory1");
 let btnEngineering1 = document.getElementById("btnEngineering1");
-
+let btnEngineering2 = document.getElementById("btnEngineering2");
 // fetching app/mongo route.
 async function fetchHST01() {
     const mongoData = await fetch("HST01");
@@ -233,10 +232,10 @@ if (btnScience1) {
     });
 }
 
-if (btnScience2) {
+if (btnEngineering2) {
     // call back function from fetchMongoData (necessary for async functions)/
     fetchCIS01().then(function(result) {
-        btnScience2.addEventListener("click", function() {
+        btnEngineering2.addEventListener("click", function() {
             var modal = document.getElementById("quizModal2");
             var span = document.getElementsByClassName("close")[0];
             let btnConfirm2 = document.getElementById("ok2");
@@ -421,4 +420,107 @@ if (btnEngineering1) {
             });
         });
     });
+}
+
+//functions to load quiz descriptions
+//history quiz 1
+let HST01 = document.getElementById("HST01");
+if(HST01){
+    fetchHST01().then(function(results){
+        //get quiz name
+        const title = document.getElementById("title");
+        const quizName = document.createTextNode(results.category + "-" + results.quizName + " Quiz");
+        title.appendChild(quizName);
+        //get description
+        const description = document.getElementById("description");
+        const quizDescription = document.createTextNode("Description: " + results.description);
+        description.appendChild(quizDescription);
+        //get number of questions
+        const numQuestions = document.getElementById("numQuestions");
+        const number = document.createTextNode("Questions: " + Object.keys(results.quizQuestions).length);
+        numQuestions.appendChild(number);
+        //get total points
+        const totalPoints = document.getElementById("totalPoints");
+        const quizPoints = document.createTextNode("Total Points: " + results.totalPoints + " Pts");
+        totalPoints.appendChild(quizPoints);
+
+        
+    });
+
+}
+
+//science quiz 1
+let SCI01 = document.getElementById("SCI01");
+if(SCI01){
+    fetchSCI01().then(function(results){
+        //get quiz name
+        const title = document.getElementById("title");
+        const quizName = document.createTextNode(results.category + "-" + results.quizName + " Quiz");
+        title.appendChild(quizName);
+        //get description
+        const description = document.getElementById("description");
+        const quizDescription = document.createTextNode("Description: " + results.description);
+        description.appendChild(quizDescription);
+        //get number of questions
+        const numQuestions = document.getElementById("numQuestions");
+        const number = document.createTextNode("Questions: " + Object.keys(results.quizQuestions).length);
+        numQuestions.appendChild(number);
+        //get total points
+        const totalPoints = document.getElementById("totalPoints");
+        const quizPoints = document.createTextNode("Total Points: " + results.totalPoints + " Pts");
+        totalPoints.appendChild(quizPoints);
+
+        
+    });
+
+}
+// emngineering quiz 1
+let MEC01 = document.getElementById("MEC01");
+if(MEC01){
+    fetchMEC01().then(function(results){
+        //get quiz name
+        const title = document.getElementById("title");
+        const quizName = document.createTextNode(results.category + "-" + results.quizName + " Quiz");
+        title.appendChild(quizName);
+        //get description
+        const description = document.getElementById("description");
+        const quizDescription = document.createTextNode("Description: " + results.description);
+        description.appendChild(quizDescription);
+        //get number of questions
+        const numQuestions = document.getElementById("numQuestions");
+        const number = document.createTextNode("Questions: " + Object.keys(results.quizQuestions).length);
+        numQuestions.appendChild(number);
+        //get total points
+        const totalPoints = document.getElementById("totalPoints");
+        const quizPoints = document.createTextNode("Total Points: " + results.totalPoints + " Pts");
+        totalPoints.appendChild(quizPoints);
+
+        
+    });
+
+}
+// engineering quiz 2
+let CIS01 = document.getElementById("CIS01");
+if(CIS01){
+    fetchCIS01().then(function(results){
+        //get quiz name
+        const title = document.getElementById("title2");
+        const quizName = document.createTextNode(results.category + "-" + results.quizName + " Quiz");
+        title.appendChild(quizName);
+        //get description
+        const description = document.getElementById("description2");
+        const quizDescription = document.createTextNode("Description: " + results.description);
+        description.appendChild(quizDescription);
+        //get number of questions
+        const numQuestions = document.getElementById("numQuestions2");
+        const number = document.createTextNode("Questions: " + Object.keys(results.quizQuestions).length);
+        numQuestions.appendChild(number);
+        //get total points
+        const totalPoints = document.getElementById("totalPoints2");
+        const quizPoints = document.createTextNode("Total Points: " + results.totalPoints + " Pts");
+        totalPoints.appendChild(quizPoints);
+
+        
+    });
+
 }
