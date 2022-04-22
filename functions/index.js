@@ -76,6 +76,24 @@ async function findOneListingByName(client, nameOfListing) {
     }
 }
 
+//Query to find a student info based on email
+async function findStudent(client, sEmail) {
+    const result = await client
+        .db("Quiz-Capstone")
+        .collection("Student")
+        .findOne({ studentEmail: sEmail });
+
+    if (result) {
+        console.log(
+            `Found a listing in the collection with the name '${sEmail}'`
+        );
+        //console.log(result);
+        return result;
+    } else {
+        console.log(`No listings found with the name '${sEmail}'`);
+    }
+}
+
 // calling main and catching for errors if any
 main().catch(console.error);
 
@@ -120,6 +138,14 @@ app.get("/MEC01", (req, res) => {
 
 app.get("/CIS01", (req, res) => {
     findOneListingByName(client, "CIS01").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
+//Express route to set up scores table
+app.get("/qResults", (req, res) => {
+    findStudent(client, "matthewjstewart@lewisu.edu").then(function(result) {
         res.type("application/json");
         res.send(`${JSON.stringify(result)}`);
     });

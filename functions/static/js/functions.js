@@ -14,6 +14,15 @@ let btnScience1 = document.getElementById("btnScience1");
 let btnHistory1 = document.getElementById("btnHistory1");
 let btnEngineering1 = document.getElementById("btnEngineering1");
 let btnEngineering2 = document.getElementById("btnEngineering2");
+let qBox = document.getElementById("quizBox");
+
+//Fetch route to display quiz scores
+async function fetchQuizData() {
+    const mongoData = await fetch("qResults");
+    const responseMongo = await mongoData.json();
+    return responseMongo;
+}
+
 // fetching app/mongo route.
 async function fetchHST01() {
     const mongoData = await fetch("HST01");
@@ -40,6 +49,38 @@ async function fetchCIS01() {
     const mongoData = await fetch("CIS01");
     const responseMongo = await mongoData.json();
     return responseMongo;
+}
+
+//Check for existence of a div, if the div exists then there is room to build a scores table.
+if(qBox) {
+    fetchQuizData().then(function(result) {
+        var rTable = document.getElementById("rTable");
+        var quizName;
+        var quizDate;
+        var quizScore;
+        //var allScores = result.scores.sort(
+        for(let i = 0; i < result.scores.length; i++) {
+            quizName = result.scores[i].quiz;
+            quizDate = result.scores[i].dateTaken;
+            quizDate = quizDate.toString();
+            quizDate = quizDate.substr(0,10);
+            quizScore = result.scores[i].score;
+            var rRow = document.createElement("tr");
+            var item1, item2, item3;
+            item1 = document.createElement("td");
+            item2 = document.createElement("td");
+            item3 = document.createElement("td");
+            
+            item1.innerHTML = quizName;
+            item2.innerHTML = quizDate;
+            item3.innerHTML = quizScore;
+            rRow.appendChild(item1);
+            rRow.appendChild(item2);
+            rRow.appendChild(item3);
+            rTable.appendChild(rRow);
+        }
+        
+    })
 }
 
 if (btnHistory1) {
