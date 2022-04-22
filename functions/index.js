@@ -68,6 +68,24 @@ async function findOneListingByName(client, nameOfListing){
     }
 }
 
+//Query database for student based on email
+async function findStudent(client, sEmail) {
+    const result = await client
+        .db("Quiz-Capstone")
+        .collection("Student")
+        .findOne({ studentEmail: sEmail });
+
+    if (result) {
+        console.log(
+            `Found a listing in the collection with the name '${sEmail}'`
+        );
+        //console.log(result);
+        return result;
+    } else {
+        console.log(`No listings found with the name '${sEmail}'`);
+    }
+}
+
 // calling main and catching for errors if any
 main().catch(console.error);
 
@@ -102,6 +120,13 @@ app.get("/user", (req, res) => {
     const user_display_name = req.query.displayName;
     // Takes in user email and display name to create a document inside the database.
     createUserListing(client, {user:user_email,display_name:user_display_name});
+});
+
+app.get("/qResults", (req, res) => {
+    findStudent(client, "matthewjstewart@lewisu.edu").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
 });
 
 // https request
