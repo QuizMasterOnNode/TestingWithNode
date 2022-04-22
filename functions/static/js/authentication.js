@@ -31,6 +31,7 @@ if (document.querySelector(".sign-up")) {
 
         const email = signupForm.email.value;
         const password = signupForm.password.value;
+        const displayName = signupForm.displayName.value;
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((cred) => {
@@ -40,9 +41,9 @@ if (document.querySelector(".sign-up")) {
                 signupForm.reset();
                 window.location.href = "./index.html";
 
-                // creating user document in database
+                // creating user document in database with display name
                 const userEmail = email;
-                const userUrl = "user?email="+email;
+                const userUrl = "user?email="+email+"&displayName="+displayName;
                 console.log(userUrl);
                 const createUser = fetch(userUrl);
             })

@@ -58,6 +58,7 @@ body {
 /* input tag properties for sign up form*/
 
 .email-section input {
+    color: #0b5566;
     font-size: 23px;
 }
 
@@ -65,7 +66,13 @@ body {
 /* input tag properties for sign up form*/
 
 .password-section input {
+    color: #0b5566;
     font-size: 22px;
+}
+
+.display-name-section input{
+    font-size: 22px;
+    color: #0b5566;
 }
 
 

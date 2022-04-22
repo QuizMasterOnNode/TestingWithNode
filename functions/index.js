@@ -96,10 +96,12 @@ app.get("/mongo", (req, res) => {
     });
 });
 
-// Create a user route to create user listing
+// Create a user route to create user listing in the database
 app.get("/user", (req, res) => {
     const user_email = req.query.email;
-    createUserListing(client, {user:user_email});
+    const user_display_name = req.query.displayName;
+    // Takes in user email and display name to create a document inside the database.
+    createUserListing(client, {user:user_email,display_name:user_display_name});
 });
 
 // https request
