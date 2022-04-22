@@ -87,7 +87,7 @@ if (document.querySelector(".log-in")) {
                 window.location.href = "./index.html";
             })
             .catch((err) => {
-                console.log(err.message);
+                alert(err.message);
             });
     });
 } else {
