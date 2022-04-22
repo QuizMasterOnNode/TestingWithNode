@@ -1,0 +1,87 @@
+{
+    "quizName": "science2",
+    "description": "This covers areas of chemistry.",
+    "totalPoints": 35,
+    "quizQuestions": {
+        "q1": {
+            "question": "One of the essential minerals in the human body is salt. How much salt (NaCl) is in the average adult human body?",
+            "options": [
+                "1 kilogram",
+                "500 grams",
+                "250 grams",
+                "practically none"
+                ],
+            "answer": "250 grams",
+            "points": 5
+        },
+        "q2": {
+            "question": "If you fill a glass to the brim with ice water and the ice melts, what will happen?",
+            "options": [
+                "The glass will over flow as the ice turns to water.",
+                "The level of water in the glass will remain unchanged as the ice melts.",
+                "The water level will drop slightly as the ice melts.",
+                "I'll never find out because I'll drink the water or walk away before anything happens."
+                ],
+            "answer": "The water level will drop slightly as the ice melts.",
+            "points": 5
+        },
+        "q3": {
+            "question": "What form of reproduction are offspring identical to each other and to the parent?",
+            "options": [
+                "sexual",
+                "asexual",
+                "homozygous",
+                "mitosis",
+                "heterozygous"
+                ],
+            "answer": "asexual",
+            "points": 5
+        },
+        "q4": {
+            "question": "The symbol Sb stands for stibnum or stibnite. What is the modern name of this element?",
+            "options": [
+                "Arsenic",
+                "Tin",
+                "Antimony",
+                "Samarium",
+                "Seaborgium"
+                ],
+            "answer": "Antimony",
+            "points": 5
+        },
+        "q5": {
+            "question": "Water-based liquids can be described as acidic, neutral, or basic, with respect to pH. Which of these describes milk?",
+            "options": [
+                "Slightly acidic",
+                "Strong acid",
+                "Neutral",
+                "Slightly basic",
+                "Milk does not have a pH"
+                ],
+            "answer": "Slightly acidic",
+            "points": 5
+        },
+        "q6": {
+            "question": "DNA codes for proteins, which are the building blocks of organisms. What is the most abundant protein in the human body?",
+            "options": [
+                "Tubulin",
+                "Albumin",
+                "Collagen",
+                "Keratin"
+                ],
+            "answer": "Collagen",
+            "points": 5
+        },
+        "q7": {
+            "question": "Noble gases are inert because they have completed outer electron shells. Which of these elements isn't a noble gas?",
+            "options": [
+                "Helium",
+                "Argon",
+                "Chlorine",
+                "Krypton"
+                ],
+            "answer": "Chlorine",
+            "points": 5
+        }
+    }
+}
