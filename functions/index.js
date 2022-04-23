@@ -79,6 +79,26 @@ async function findOneDisplayNameByName(client, nameOfEmail){
         return result;
     }else {
         console.log(`No listings found with the name '${nameOfEmail}'`);
+        //console.log(result);
+        return result;
+    } 
+}
+
+//Query database for student based on email
+async function findStudent(client, sEmail) {
+    const result = await client
+        .db("Quiz-Capstone")
+        .collection("Student")
+        .findOne({ studentEmail: sEmail });
+
+    if (result) {
+        console.log(
+            `Found a listing in the collection with the name '${sEmail}'`
+        );
+        //console.log(result);
+        return result;
+    } else {
+        console.log(`No listings found with the name '${sEmail}'`);
     }
 }
 
@@ -126,6 +146,12 @@ app.get("/userDisplayName", (req, res) => {
     });
 });
 
+app.get("/qResults", (req, res) => {
+    findStudent(client, "matthewjstewart@lewisu.edu").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
 
 // https request
 exports.app = functions.https.onRequest(app);
