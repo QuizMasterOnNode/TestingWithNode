@@ -58,6 +58,29 @@ async function createListing(client, newListing) {
     );
 }
 
+// CREATE (create listing)
+async function createUserListing(client, newListing){
+    const result = await client.db("Quiz-Capstone").collection("students").insertOne(newListing);
+
+    console.log(`New listing created with the following id: ${result.insertedId}`);
+}
+
+// READ (find listing)
+async function findOneDisplayNameByName(client, nameOfEmail){
+    const result = await client.db("Quiz-Capstone").collection("students").findOne({email:
+        nameOfEmail});
+
+    if(result){
+        console.log(`Found a listing in the collection with the name '${nameOfEmail}'`);
+        console.log(result);
+        return result;
+    }else {
+        console.log(`No listings found with the name '${nameOfEmail}'`);
+        //console.log(result);
+        return result;
+    } 
+}
+
 // READ (find listing)
 async function findOneListingByName(client, nameOfListing) {
     const result = await client
@@ -139,6 +162,23 @@ app.get("/MEC01", (req, res) => {
 app.get("/CIS01", (req, res) => {
     findOneListingByName(client, "CIS01").then(function(result) {
         res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
+// Create a user route to create user listing in the database
+app.get("/user", (req, res) => {
+    const user_email = req.query.email;
+    const user_display_name = req.query.displayName;
+    // Takes in user email and display name to create a document inside the database.
+    createUserListing(client, {email:user_email,display_name:user_display_name});
+});
+
+// get the user display name
+app.get("/userDisplayName", (req, res) => {
+    const user_email = req.query.email;
+    findOneDisplayNameByName(client, user_email).then(function(result){
+        res.type('application/json');
         res.send(`${JSON.stringify(result)}`);
     });
 });
