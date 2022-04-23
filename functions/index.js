@@ -44,14 +44,14 @@ async function createListing(client, newListing) {
 
 // CREATE (create listing)
 async function createUserListing(client, newListing){
-    const result = await client.db("Quiz-Capstone").collection("students").insertOne(newListing);
+    const result = await client.db("Quiz-Capstone").collection("Student").insertOne(newListing);
 
     console.log(`New listing created with the following id: ${result.insertedId}`);
 }
 
 // READ (find listing)
 async function findOneDisplayNameByName(client, nameOfEmail){
-    const result = await client.db("Quiz-Capstone").collection("students").findOne({email:
+    const result = await client.db("Quiz-Capstone").collection("Student").findOne({studentEmail:
         nameOfEmail});
 
     if(result){
@@ -150,7 +150,7 @@ app.get("/user", (req, res) => {
     const user_email = req.query.email;
     const user_display_name = req.query.displayName;
     // Takes in user email and display name to create a document inside the database.
-    createUserListing(client, {email:user_email,display_name:user_display_name});
+    createUserListing(client, {studentEmail:user_email,display_name:user_display_name});
 });
 
 // get the user display name
