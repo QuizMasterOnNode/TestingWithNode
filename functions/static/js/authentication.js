@@ -142,12 +142,21 @@ if (document.querySelector(".sign-up")) {
 
         const email = signupForm.email.value;
         const password = signupForm.password.value;
+        const displayName = signupForm.displayName.value;
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((cred) => {
                 alert("user created and signed in");
                 console.log("user created:", cred.user);
                 signupForm.reset();
+
+                // creating user document in database with display name
+                const userEmail = email;
+                const userUrl = "user?email="+email+"&displayName="+displayName;
+                const createUser = fetch(userUrl);
+                // Storing display Name to display on the home page and welcome user.
+                sessionStorage.setItem("displayName", displayName);
+
                 window.location.href = "./index.html";
             })
             .catch((err) => {
@@ -188,7 +197,12 @@ if (document.querySelector(".log-in")) {
                 alert("logged in");
                 console.log("user logged in:", cred.user);
                 loginForm.reset();
-                window.location.href = "./index.html";
+                // Calling function to retrieve the display name of the user to display on home page.
+                fetchUserDisplayName(email).then(function (result) {
+                    sessionStorage.setItem("displayName", result.display_name);
+                }).then(function(){
+                    window.location.href = "./index.html";
+                })
             })
             .catch((err) => {
                 console.log(err.message);
@@ -206,6 +220,11 @@ setTimeout(() => {
         if (user) {
             // Will set up the menu bar options.
             setupUserUI(user);
+            // Inserting display name to home page.
+            if(document.querySelector(".welcome")){
+                //alert(sessionStorage.getItem("displayName"));
+                document.querySelector(".welcome").innerHTML = ", "+ sessionStorage.getItem("displayName");
+            }
         } else {
             setupUserUI(null);
         }
@@ -237,3 +256,14 @@ const setupUserUI = (user) => {
 };
 
 // // END OF FIREBASE SECTION
+
+// Function to fetch userDisplayName route and retrieve the display name. 
+async function fetchUserDisplayName(email){
+    const userEmail = email;
+    const userUrl = "userDisplayName?email="+email;
+    console.log(userUrl);
+    const userDisplayName = await fetch(userUrl);
+    const userDisplayNameResponse = await userDisplayName.json();
+
+    return userDisplayNameResponse;
+}
