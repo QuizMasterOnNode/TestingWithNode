@@ -55,11 +55,12 @@
 
             <div id="quizList">
                 <div id="quizBox">
-                    <h4>Engineering Quiz 1</h4>
-                    <p>This is an Engineering quiz description.</p>
-                    <p></p>
-                    <p>Questions: 7</p>
-                    <p>Maximum Points: 24 Points</p>
+                    <div id="MEC01">
+                        <!--engineering 1 quiz data-->
+                        <h4 id="title"></h4>
+                        <p id="description"></p>
+                        <p id="numQuestions"></p>
+                        <p id="totalPoints"></p>
                     <p>Time Limit: None</p>
                     <p>Attempts: Unlimited</p>
                     <div id="startButton">
@@ -69,24 +70,26 @@
               </button>
                     </div>
                 </div>
+                </div>
+
                 <div id="quizBox">
-                    <h4>Engineering Quiz 2</h4>
-                    <p>This is an Engineering quiz description.</p>
-                    <p></p>
-                    <p>Questions: 7</p>
-                    <p>Maximum Points: 24 Points</p>
+                    <div id="CIS01">
+                        <!--engineering 1 quiz data-->
+                        <h4 id="title2"></h4>
+                        <p id="description2"></p>
+                        <p id="numQuestions2"></p>
+                        <p id="totalPoints2"></p>
                     <p>Time Limit: None</p>
                     <p>Attempts: Unlimited</p>
                     <div id="startButton">
                         <!--id confirmStart is referenced by jquery to load a confirm form and redirect to quiz page-->
-                        <button id="confirmStart" name="start" type="button" onclick="myFunction()">
+                        <button id="btnEngineering2" name="start" type="button">
                 Start
               </button>
                     </div>
                 </div>
-                <div>
-                    <div></div>
-                </div>
+            </div>
+
             </div>
         </div>
     </div>

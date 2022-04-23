@@ -11,9 +11,17 @@
 // });
 
 let btnScience1 = document.getElementById("btnScience1");
-let btnScience2 = document.getElementById("btnScience2");
 let btnHistory1 = document.getElementById("btnHistory1");
 let btnEngineering1 = document.getElementById("btnEngineering1");
+let btnEngineering2 = document.getElementById("btnEngineering2");
+let qBox = document.getElementById("quizBox");
+
+//Fetch route to display quiz scores
+async function fetchQuizData() {
+    const mongoData = await fetch("qResults");
+    const responseMongo = await mongoData.json();
+    return responseMongo;
+}
 
 // fetching app/mongo route.
 async function fetchHST01() {
@@ -41,6 +49,38 @@ async function fetchCIS01() {
     const mongoData = await fetch("CIS01");
     const responseMongo = await mongoData.json();
     return responseMongo;
+}
+
+//Check for existence of a div, if the div exists then there is room to build a scores table.
+if(qBox) {
+    fetchQuizData().then(function(result) {
+        var rTable = document.getElementById("rTable");
+        var quizName;
+        var quizDate;
+        var quizScore;
+        //var allScores = result.scores.sort(
+        for(let i = 0; i < result.scores.length; i++) {
+            quizName = result.scores[i].quiz;
+            quizDate = result.scores[i].dateTaken;
+            quizDate = quizDate.toString();
+            quizDate = quizDate.substr(0,10);
+            quizScore = result.scores[i].score;
+            var rRow = document.createElement("tr");
+            var item1, item2, item3;
+            item1 = document.createElement("td");
+            item2 = document.createElement("td");
+            item3 = document.createElement("td");
+            
+            item1.innerHTML = quizName;
+            item2.innerHTML = quizDate;
+            item3.innerHTML = quizScore;
+            rRow.appendChild(item1);
+            rRow.appendChild(item2);
+            rRow.appendChild(item3);
+            rTable.appendChild(rRow);
+        }
+        
+    })
 }
 
 if (btnHistory1) {
@@ -233,10 +273,10 @@ if (btnScience1) {
     });
 }
 
-if (btnScience2) {
+if (btnEngineering2) {
     // call back function from fetchMongoData (necessary for async functions)/
     fetchCIS01().then(function(result) {
-        btnScience2.addEventListener("click", function() {
+        btnEngineering2.addEventListener("click", function() {
             var modal = document.getElementById("quizModal2");
             var span = document.getElementsByClassName("close")[0];
             let btnConfirm2 = document.getElementById("ok2");
@@ -421,4 +461,107 @@ if (btnEngineering1) {
             });
         });
     });
+}
+
+//functions to load quiz descriptions
+//history quiz 1
+let HST01 = document.getElementById("HST01");
+if(HST01){
+    fetchHST01().then(function(results){
+        //get quiz name
+        const title = document.getElementById("title");
+        const quizName = document.createTextNode(results.category + "-" + results.quizName + " Quiz");
+        title.appendChild(quizName);
+        //get description
+        const description = document.getElementById("description");
+        const quizDescription = document.createTextNode("Description: " + results.description);
+        description.appendChild(quizDescription);
+        //get number of questions
+        const numQuestions = document.getElementById("numQuestions");
+        const number = document.createTextNode("Questions: " + Object.keys(results.quizQuestions).length);
+        numQuestions.appendChild(number);
+        //get total points
+        const totalPoints = document.getElementById("totalPoints");
+        const quizPoints = document.createTextNode("Total Points: " + results.totalPoints + " Pts");
+        totalPoints.appendChild(quizPoints);
+
+        
+    });
+
+}
+
+//science quiz 1
+let SCI01 = document.getElementById("SCI01");
+if(SCI01){
+    fetchSCI01().then(function(results){
+        //get quiz name
+        const title = document.getElementById("title");
+        const quizName = document.createTextNode(results.category + "-" + results.quizName + " Quiz");
+        title.appendChild(quizName);
+        //get description
+        const description = document.getElementById("description");
+        const quizDescription = document.createTextNode("Description: " + results.description);
+        description.appendChild(quizDescription);
+        //get number of questions
+        const numQuestions = document.getElementById("numQuestions");
+        const number = document.createTextNode("Questions: " + Object.keys(results.quizQuestions).length);
+        numQuestions.appendChild(number);
+        //get total points
+        const totalPoints = document.getElementById("totalPoints");
+        const quizPoints = document.createTextNode("Total Points: " + results.totalPoints + " Pts");
+        totalPoints.appendChild(quizPoints);
+
+        
+    });
+
+}
+// emngineering quiz 1
+let MEC01 = document.getElementById("MEC01");
+if(MEC01){
+    fetchMEC01().then(function(results){
+        //get quiz name
+        const title = document.getElementById("title");
+        const quizName = document.createTextNode(results.category + "-" + results.quizName + " Quiz");
+        title.appendChild(quizName);
+        //get description
+        const description = document.getElementById("description");
+        const quizDescription = document.createTextNode("Description: " + results.description);
+        description.appendChild(quizDescription);
+        //get number of questions
+        const numQuestions = document.getElementById("numQuestions");
+        const number = document.createTextNode("Questions: " + Object.keys(results.quizQuestions).length);
+        numQuestions.appendChild(number);
+        //get total points
+        const totalPoints = document.getElementById("totalPoints");
+        const quizPoints = document.createTextNode("Total Points: " + results.totalPoints + " Pts");
+        totalPoints.appendChild(quizPoints);
+
+        
+    });
+
+}
+// engineering quiz 2
+let CIS01 = document.getElementById("CIS01");
+if(CIS01){
+    fetchCIS01().then(function(results){
+        //get quiz name
+        const title = document.getElementById("title2");
+        const quizName = document.createTextNode(results.category + "-" + results.quizName + " Quiz");
+        title.appendChild(quizName);
+        //get description
+        const description = document.getElementById("description2");
+        const quizDescription = document.createTextNode("Description: " + results.description);
+        description.appendChild(quizDescription);
+        //get number of questions
+        const numQuestions = document.getElementById("numQuestions2");
+        const number = document.createTextNode("Questions: " + Object.keys(results.quizQuestions).length);
+        numQuestions.appendChild(number);
+        //get total points
+        const totalPoints = document.getElementById("totalPoints2");
+        const quizPoints = document.createTextNode("Total Points: " + results.totalPoints + " Pts");
+        totalPoints.appendChild(quizPoints);
+
+        
+    });
+
 }
