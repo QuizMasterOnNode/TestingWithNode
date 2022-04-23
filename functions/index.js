@@ -68,6 +68,20 @@ async function findOneListingByName(client, nameOfListing){
     }
 }
 
+// READ (find listing)
+async function findOneDisplayNameByName(client, nameOfEmail){
+    const result = await client.db("Quiz-Capstone").collection("students").findOne({email:
+        nameOfEmail});
+
+    if(result){
+        console.log(`Found a listing in the collection with the name '${nameOfEmail}'`);
+        console.log(result);
+        return result;
+    }else {
+        console.log(`No listings found with the name '${nameOfEmail}'`);
+    }
+}
+
 // calling main and catching for errors if any
 main().catch(console.error);
 
@@ -101,8 +115,17 @@ app.get("/user", (req, res) => {
     const user_email = req.query.email;
     const user_display_name = req.query.displayName;
     // Takes in user email and display name to create a document inside the database.
-    createUserListing(client, {user:user_email,display_name:user_display_name});
+    createUserListing(client, {email:user_email,display_name:user_display_name});
 });
+
+app.get("/userDisplayName", (req, res) => {
+    const user_email = req.query.email;
+    findOneDisplayNameByName(client, user_email).then(function(result){
+        res.type('application/json');
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
 
 // https request
 exports.app = functions.https.onRequest(app);
