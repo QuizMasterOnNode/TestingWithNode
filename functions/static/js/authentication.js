@@ -45,6 +45,7 @@ if (document.querySelector(".sign-up")) {
                 const createUser = fetch(userUrl);
                 // Storing display Name to display on the home page and welcome user.
                 sessionStorage.setItem("displayName", displayName);
+                sessionStorage.setItem("email", userEmail);
 
                 window.location.href = "./index.html";
             })
@@ -89,6 +90,7 @@ if (document.querySelector(".log-in")) {
                 // Calling function to retrieve the display name of the user to display on home page.
                 fetchUserDisplayName(email).then(function (result) {
                     sessionStorage.setItem("displayName", result.display_name);
+                    sessionStorage.setItem("email", email);
                 }).then(function(){
                     window.location.href = "./index.html";
                 })
@@ -107,6 +109,7 @@ setTimeout(() => {
     onAuthStateChanged(auth, (user) => {
         console.log("user status changed:, ", user);
         if (user) {
+            sessionStorage.setItem("email", user.email);
             // Will set up the menu bar options.
             setupUserUI(user);
             // Inserting display name to home page.
@@ -155,4 +158,11 @@ async function fetchUserDisplayName(email){
     const userDisplayNameResponse = await userDisplayName.json();
 
     return userDisplayNameResponse;
-}
+};
+
+async function dumpSession() {
+    //console.log(sessionStorage.getItem("email"));
+    return sessionStorage.getItem("email");
+};
+
+export {dumpSession};

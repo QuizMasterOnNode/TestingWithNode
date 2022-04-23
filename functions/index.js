@@ -10,26 +10,10 @@ const client = new MongoClient(uri);
 app.use(express.static(path.join(__dirname, "static")));
 
 async function main() {
-    //const uri = "mongodb+srv://QuizMaster:QuizMasterPass@cluster0.jm17e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
-    //const client = new MongoClient(uri);
-
     try {
         // Will connect to database as soon as user enters the site.
         await client.connect();
 
-        // gets list of databases.
-        //await listDatabases(client);
-
-        // Creating listing, calling function to create list.
-        // await createListing(client, {
-        //     name:"Lovely Loft",
-        //     summary: "A charming loft in paris",
-        //     bedrooms:1,
-        //     bathrooms:1
-        // })
-
-        await findOneListingByName(client, "HST01");
     } catch (e) {
         console.error(e);
     } finally {
@@ -92,7 +76,6 @@ async function findOneListingByName(client, nameOfListing) {
         console.log(
             `Found a listing in the collection with the name '${nameOfListing}'`
         );
-        console.log(result);
         return result;
     } else {
         console.log(`No listings found with the name '${nameOfListing}'`);
@@ -107,10 +90,6 @@ async function findStudent(client, sEmail) {
         .findOne({ studentEmail: sEmail });
 
     if (result) {
-        console.log(
-            `Found a listing in the collection with the name '${sEmail}'`
-        );
-        //console.log(result);
         return result;
     } else {
         console.log(`No listings found with the name '${sEmail}'`);
@@ -180,12 +159,15 @@ app.get("/userDisplayName", (req, res) => {
     findOneDisplayNameByName(client, user_email).then(function(result){
         res.type('application/json');
         res.send(`${JSON.stringify(result)}`);
+        
     });
 });
 
 //Express route to set up scores table
 app.get("/qResults", (req, res) => {
-    findStudent(client, "matthewjstewart@lewisu.edu").then(function(result) {
+    const user_email = req.query.email;
+    console.log(user_email);
+    findStudent(client, user_email).then(function(result) {
         res.type("application/json");
         res.send(`${JSON.stringify(result)}`);
     });
