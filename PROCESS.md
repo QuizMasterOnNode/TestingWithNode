@@ -27,11 +27,17 @@ Guest will be added as users with a guest perspective. This way they will not be
 Here is our definition of done.
 
 • The hypothetical user in the story can successfully complete the desired action.
+
 • The user story or the desired feature can be executed via the production branch by a user.
+
 • The code is error free when run in the testing branch.
+
 • The code is well commented/documented.
+
 • The code has been reviewed by another team member.
+
 • The code is implemented in the production branch and the production branch runs as intended.
+
 • The production branch is deployed to the product firebase hosting site.
  
 • The user stories are demoed before deploying to the production site.
