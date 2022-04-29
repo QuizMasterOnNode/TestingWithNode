@@ -128,15 +128,6 @@ app.get("/about", (req, res) => {
     res.sendFile(__dirname + "/static/about.html");
 });
 
-app.get("/hello", (req, res) => {
-    res.send("Hi there!");
-    console.log("OKAY");
-});
-
-app.get("/api", (req, res) => {
-    res.json({ bongs: "BONG ".repeat(hours) });
-});
-
 app.get("/HST01", (req, res) => {
     findOneListingByName(client, "HST01").then(function(result) {
         res.type("application/json");
@@ -181,6 +172,13 @@ app.get("/CIS01", (req, res) => {
 
 app.get("/MTH01", (req, res) => {
     findOneListingByName(client, "MTH01").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
+app.get("/MTH02", (req, res) => {
+    findOneListingByName(client, "MTH02").then(function(result) {
         res.type("application/json");
         res.send(`${JSON.stringify(result)}`);
     });

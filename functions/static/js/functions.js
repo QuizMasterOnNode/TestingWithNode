@@ -17,6 +17,7 @@ let btnHistory2 = document.getElementById("btnHistory2");
 let btnEngineering1 = document.getElementById("btnEngineering1");
 let btnEngineering2 = document.getElementById("btnEngineering2");
 let btnMath1 = document.getElementById("btnMath1");
+let btnMath2 = document.getElementById("btnMath2");
 let qBox = document.getElementById("quizBox");
 
 import { dumpSession } from "./authentication.js";
@@ -74,6 +75,13 @@ async function fetchCIS01() {
 // fetching app/mongo route.
 async function fetchMTH01() {
     const mongoData = await fetch("MTH01");
+    const responseMongo = await mongoData.json();
+    return responseMongo;
+}
+
+// fetching app/mongo route.
+async function fetchMTH02() {
+    const mongoData = await fetch("MTH02");
     const responseMongo = await mongoData.json();
     return responseMongo;
 }
@@ -780,6 +788,115 @@ if (btnMath1) {
     });
 }
 
+if (btnMath2) {
+    // call back function from fetchMongoData (necessary for async functions)/
+    fetchMTH02().then(function(result) {
+        btnMath2.addEventListener("click", function() {
+            var modal = document.getElementById("quizModal2");
+            var span = document.getElementsByClassName("close")[0];
+            let btnConfirm2 = document.getElementById("ok2");
+            let btnCancel2 = document.getElementById("cancel2");
+            modal.style.display = "block";
+            span.onclick = function() {
+                modal.style.display = "none";
+            };
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+            btnConfirm2.addEventListener("click", function() {
+                let quizPage = window.open("quizPage.html");
+                quizPage.addEventListener("DOMContentLoaded", () => {
+                    // Now we can access elements on the quiz page
+                    quizPage.document.getElementById("quizHeading1").innerHTML =
+                        result.category + " - " + result.quizName;
+                    var questionCount = Object.keys(result.quizQuestions).length;
+                    var quizForm = document.createElement("form");
+                    quizForm.id = "quizForm";
+                    quizPage.document.getElementById("questions").appendChild(quizForm);
+                    for (let i = 0; i < questionCount; i++) {
+                        var questionHeading = document.createElement("h4");
+                        questionHeading.id = "questionHeading";
+                        questionHeading.innerHTML = "Question" + " " + (i + 1);
+                        var question = document.createElement("div");
+                        question.id = "question" + (i + 1);
+                        var newline2 = document.createElement("br");
+                        var newline4 = document.createElement("br");
+                        var ptag = document.createElement("p");
+                        var questionText = document.createTextNode(
+                            result.quizQuestions[i].question
+                        );
+                        ptag.appendChild(questionText);
+                        question.appendChild(questionHeading);
+                        question.appendChild(newline4);
+                        question.appendChild(ptag);
+                        question.appendChild(newline2);
+                        
+                        //This section checks to see if a picture is associated with
+                        //a question. At the time of this comment (04/29/2022)
+                        //this code only appears for Math Quiz 2. 
+                        var qPic = result.quizQuestions[i].quizPic;
+                        if(qPic){
+                            var picTag = document.createElement("img");
+                            picTag.alt = "question picture";
+                        
+                            picTag.src = qPic;
+                            question.appendChild(picTag);
+                        }
+                        //End picture checking/retrieving code
+                        
+                        quizPage.document.getElementById("quizForm").appendChild(question);
+
+                        var optionCount = Object.keys(
+                            result.quizQuestions[i].options
+                        ).length;
+                        var options = document.createElement("div");
+                        options.id = "question" + (i + 1) + "Options";
+                        for (let j = 0; j < optionCount; j++) {
+                            var radiobox = document.createElement("input");
+                            radiobox.type = "radio";
+                            radiobox.id = "q" + (i + 1) + "Option" + (j + 1);
+                            radiobox.name = "q" + (i + 1) + "Options";
+                            radiobox.value = i + 1;
+
+                            var label = document.createElement("label");
+                            label.htmlFor = "q" + (i + 1) + "Option" + (j + 1);
+
+                            var option = document.createTextNode(
+                                " " + result.quizQuestions[i].options[j]
+                            );
+                            label.appendChild(option);
+
+                            var newline = document.createElement("br");
+                            var newline3 = document.createElement("br");
+
+                            options.appendChild(radiobox);
+                            options.appendChild(label);
+                            options.appendChild(newline);
+                            options.appendChild(newline3);
+
+                            quizPage.document
+                                .getElementById("question" + (i + 1))
+                                .appendChild(options);
+                        }
+                    }
+                    var sbDiv = document.createElement("div");
+                    sbDiv.id = "submit_button";
+                    var submitButton = document.createElement("button");
+                    submitButton.innerHTML = "Submit";
+                    sbDiv.appendChild(submitButton);
+                    quizPage.document.getElementById("quizForm").appendChild(sbDiv);
+                });
+                modal.style.display = "none";
+            });
+            btnCancel2.addEventListener("click", function() {
+                modal.style.display = "none";
+            });
+        });
+    });
+}
+
 //functions to load quiz descriptions
 // History quiz 1
 let HST01 = document.getElementById("HST01");
@@ -1046,6 +1163,45 @@ if (MTH01) {
         //get total points
         var totalPoints = document
             .getElementById("MTH01")
+            .getElementsByClassName("totalPoints")[0];
+        const quizPoints = document.createTextNode(
+            "Total Points: " + results.totalPoints + " Pts"
+        );
+        totalPoints.appendChild(quizPoints);
+    });
+}
+
+
+let MTH02 = document.getElementById("MTH02");
+if (MTH02) {
+    fetchMTH02().then(function(results) {
+        //get quiz name
+        var title = document
+            .getElementById("MTH02")
+            .getElementsByClassName("title")[0];
+        const quizName = document.createTextNode(
+            results.category + "-" + results.quizName + " Quiz"
+        );
+        title.appendChild(quizName);
+        //get description
+        var description = document
+            .getElementById("MTH02")
+            .getElementsByClassName("description")[0];
+        const quizDescription = document.createTextNode(
+            "Description: " + results.description
+        );
+        description.appendChild(quizDescription);
+        //get number of questions
+        var numQuestions = document
+            .getElementById("MTH02")
+            .getElementsByClassName("numQuestions")[0];
+        const number = document.createTextNode(
+            "Questions: " + Object.keys(results.quizQuestions).length
+        );
+        numQuestions.appendChild(number);
+        //get total points
+        var totalPoints = document
+            .getElementById("MTH02")
             .getElementsByClassName("totalPoints")[0];
         const quizPoints = document.createTextNode(
             "Total Points: " + results.totalPoints + " Pts"
