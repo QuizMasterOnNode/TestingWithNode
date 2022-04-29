@@ -182,16 +182,7 @@ app.get("/qResults", (req, res) => {
         res.send(`${JSON.stringify(result)}`);
     });
 });
-//test
-//var userModel = require('./models/user/user.model.server');
-//userModel.createUser({
-    //    username:'cortez', password: 'cortez'
-    //});
-    //var userService = require('./models/services/user.service.server');
-    //userService(app);
-    var userService = require('./models/services/question.service.server');
-    userService(app);
-    //testnp
+
 // https request
 exports.app = functions.https.onRequest(app);
 
