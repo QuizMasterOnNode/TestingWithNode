@@ -1,14 +1,24 @@
 const functions = require("firebase-functions");
 const express = require("express");
+var bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+mongoose.connect("mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/Quiz-Capstone?retryWrites=true&w=majority")
 const app = express();
 const path = require("path");
 const { MongoClient, Db } = require("mongodb");
 
 const uri =
-    "mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    //"mongodb+srv://cortezB:cortezPassword@quizcluster.5oc2z.mongodb.net/Quiz-Capstone?retryWrites=true&w=majority"
+    "mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/Quiz-Capstone?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 app.use(express.static(path.join(__dirname, "static")));
+//test
+app.use =(bodyParser.json());
+app.use =(bodyParser.urlencoded({extended: true}));
 
+//app.use =(express.urlencoded({extended: true}));
+//app.use =(express.json()); // To parse the incoming request with JSON payloads
+//end test
 async function main() {
     try {
         // Will connect to database as soon as user enters the site.
@@ -172,6 +182,16 @@ app.get("/qResults", (req, res) => {
         res.send(`${JSON.stringify(result)}`);
     });
 });
-
+//test
+//var userModel = require('./models/user/user.model.server');
+//userModel.createUser({
+    //    username:'cortez', password: 'cortez'
+    //});
+    //var userService = require('./models/services/user.service.server');
+    //userService(app);
+    var userService = require('./models/services/question.service.server');
+    userService(app);
+    //testnp
 // https request
 exports.app = functions.https.onRequest(app);
+
