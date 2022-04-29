@@ -1,8 +1,10 @@
 const functions = require("firebase-functions");
 const express = require("express");
-var bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/Quiz-Capstone?retryWrites=true&w=majority")
+var bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+mongoose.connect(
+    "mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/Quiz-Capstone?retryWrites=true&w=majority"
+);
 const app = express();
 const path = require("path");
 const { MongoClient, Db } = require("mongodb");
@@ -13,8 +15,8 @@ const uri =
 const client = new MongoClient(uri);
 app.use(express.static(path.join(__dirname, "static")));
 //test
-app.use =(bodyParser.json());
-app.use =(bodyParser.urlencoded({extended: true}));
+app.use = bodyParser.json();
+app.use = bodyParser.urlencoded({ extended: true });
 
 //app.use =(express.urlencoded({extended: true}));
 //app.use =(express.json()); // To parse the incoming request with JSON payloads
@@ -23,7 +25,6 @@ async function main() {
     try {
         // Will connect to database as soon as user enters the site.
         await client.connect();
-
     } catch (e) {
         console.error(e);
     } finally {
@@ -53,26 +54,35 @@ async function createListing(client, newListing) {
 }
 
 // CREATE (create listing)
-async function createUserListing(client, newListing){
-    const result = await client.db("Quiz-Capstone").collection("Student").insertOne(newListing);
+async function createUserListing(client, newListing) {
+    const result = await client
+        .db("Quiz-Capstone")
+        .collection("Student")
+        .insertOne(newListing);
 
-    console.log(`New listing created with the following id: ${result.insertedId}`);
+    console.log(
+        `New listing created with the following id: ${result.insertedId}`
+    );
 }
 
 // READ (find listing)
-async function findOneDisplayNameByName(client, nameOfEmail){
-    const result = await client.db("Quiz-Capstone").collection("Student").findOne({studentEmail:
-        nameOfEmail});
+async function findOneDisplayNameByName(client, nameOfEmail) {
+    const result = await client
+        .db("Quiz-Capstone")
+        .collection("Student")
+        .findOne({ studentEmail: nameOfEmail });
 
-    if(result){
-        console.log(`Found a listing in the collection with the name '${nameOfEmail}'`);
+    if (result) {
+        console.log(
+            `Found a listing in the collection with the name '${nameOfEmail}'`
+        );
         console.log(result);
         return result;
-    }else {
+    } else {
         console.log(`No listings found with the name '${nameOfEmail}'`);
         //console.log(result);
         return result;
-    } 
+    }
 }
 
 // READ (find listing)
@@ -134,8 +144,22 @@ app.get("/HST01", (req, res) => {
     });
 });
 
+app.get("/HST02", (req, res) => {
+    findOneListingByName(client, "HST02").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
 app.get("/SCI01", (req, res) => {
     findOneListingByName(client, "SCI01").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
+app.get("/CIS02", (req, res) => {
+    findOneListingByName(client, "CIS02").then(function(result) {
         res.type("application/json");
         res.send(`${JSON.stringify(result)}`);
     });
@@ -155,21 +179,30 @@ app.get("/CIS01", (req, res) => {
     });
 });
 
+app.get("/MTH01", (req, res) => {
+    findOneListingByName(client, "MTH01").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
 // Create a user route to create user listing in the database
 app.get("/user", (req, res) => {
     const user_email = req.query.email;
     const user_display_name = req.query.displayName;
     // Takes in user email and display name to create a document inside the database.
-    createUserListing(client, {studentEmail:user_email,display_name:user_display_name});
+    createUserListing(client, {
+        studentEmail: user_email,
+        display_name: user_display_name,
+    });
 });
 
 // get the user display name
 app.get("/userDisplayName", (req, res) => {
     const user_email = req.query.email;
-    findOneDisplayNameByName(client, user_email).then(function(result){
-        res.type('application/json');
+    findOneDisplayNameByName(client, user_email).then(function(result) {
+        res.type("application/json");
         res.send(`${JSON.stringify(result)}`);
-        
     });
 });
 
@@ -185,13 +218,12 @@ app.get("/qResults", (req, res) => {
 //test
 //var userModel = require('./models/user/user.model.server');
 //userModel.createUser({
-    //    username:'cortez', password: 'cortez'
-    //});
-    //var userService = require('./models/services/user.service.server');
-    //userService(app);
-    var userService = require('./models/services/question.service.server');
-    userService(app);
-    //testnp
+//    username:'cortez', password: 'cortez'
+//});
+//var userService = require('./models/services/user.service.server');
+//userService(app);
+//var userService = require('./models/services/question.service.server');
+//userService(app);
+//testnp
 // https request
 exports.app = functions.https.onRequest(app);
-

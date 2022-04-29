@@ -38,7 +38,7 @@
                 <span class="close">&times;</span>
                 <p>You're about to take a quiz.</p>
                 <button type="button" id="ok1">Ok</button>
-                <button type="button " id="cancel1">Cancel</button>
+                <button type="button" id="cancel1">Cancel</button>
             </div>
         </div>
 
@@ -48,50 +48,55 @@
                 <span class="close">&times;</span>
                 <p>You're about to take a quiz.</p>
                 <button type="button" id="ok2">Ok</button>
-                <button type="button " id="cancel2">Cancel</button>
+                <button type="button" id="cancel2">Cancel</button>
             </div>
         </div>
 
         <div id="quizList">
             <div id="quizBox">
-                <h4>Math Quiz 1</h4>
-                <p>This is a math quiz description.</p>
-                <p></p>
-                <p>Questions: 7</p>
-                <p>Maximum Points: 24 Points</p>
-                <p>Time Limit: None</p>
-                <p>Attempts: Unlimited</p>
-                <div id="startButton">
-                    <!--id confirmStart is referenced by jquery to load a confirm form and redirect to quiz page-->
-                    <button id="confirmStart" name="start" type="button" onclick="myFunction()">
-              Start
-            </button>
+                <div id="MTH01">
+                    <!--math 1 quiz data-->
+                    <h4 class="title"></h4>
+                    <p class="description"></p>
+                    <p class="numQuestions"></p>
+                    <p class="totalPoints"></p>
+
+                    <p>Time Limit: None</p>
+                    <p>Attempts: Unlimited</p>
+                    <div id="startButton">
+                        <!--id confirmStart is referenced by jquery to load a confirm form and redirect to quiz page-->
+                        <button id="btnMath1" name="start" type="button">Start</button>
+                    </div>
                 </div>
             </div>
             <div id="quizBox">
-                <h4>Math Quiz 2</h4>
-                <p>This is a math quiz description.</p>
-                <p></p>
-                <p>Questions: 7</p>
-                <p>Maximum Points: 24 Points</p>
-                <p>Time Limit: None</p>
-                <p>Attempts: Unlimited</p>
-                <div id="startButton">
-                    <!--id confirmStart is referenced by jquery to load a confirm form and redirect to quiz page-->
-                    <button id="confirmStart" name="start" type="button" onclick="myFunction()">
-              Start
-            </button>
+                <div id="MTH02">
+                    <!--math 2 quiz data-->
+                    <h4 class="title"></h4>
+                    <p class="description"></p>
+                    <p class="numQuestions"></p>
+                    <p class="totalPoints"></p>
+
+                    <p>Time Limit: None</p>
+                    <p>Attempts: Unlimited</p>
+                    <div id="startButton">
+                        <!--id confirmStart is referenced by jquery to load a confirm form and redirect to quiz page-->
+                        <button id="btnMath2" name="start" type="button">Start</button>
+                    </div>
                 </div>
             </div>
+            <div>
+                <div></div>
+            </div>
         </div>
-    </div>
-    <!--Footer being referenced by jQuery to open up footer html-->
-    <div id="footer"></div>
-    <!--jQuery source file-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!--JavaScript project file-->
-    <script type="module" src="js/script.js"></script>
-    <script type="module" src="js/authentication.js"></script>
+        <!--Footer being referenced by jQuery to open up footer html-->
+        <div id="footer"></div>
+        <!--jQuery source file-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!--JavaScript project file-->
+        <script type="module" src="js/script.js"></script>
+        <script type="module" src="js/functions.js"></script>
+        <script type="module" src="js/authentication.js"></script>
 </body>
 
 </html>
