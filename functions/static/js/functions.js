@@ -86,6 +86,7 @@ async function fetchMTH02() {
     return responseMongo;
 }
 
+
 //Check for existence of a div, if the div exists then there is room to build a scores table.
 if (qBox) {
     const userName = await dumpSession();
@@ -99,12 +100,12 @@ if (qBox) {
             var quizDate;
             var quizScore;
             //var allScores = result.scores.sort(
-            for (let i = 0; i < result.scores.length; i++) {
-                quizName = result.scores[i].quiz;
-                quizDate = result.scores[i].dateTaken;
+            for (let i = 0; i < result.length; i++) {
+                quizName = result[i].quiz;
+                quizDate = result[i].dateTaken;
                 quizDate = quizDate.toString();
                 quizDate = quizDate.substr(0, 10);
-                quizScore = result.scores[i].score;
+                quizScore = result[i].score;
                 var rRow = document.createElement("tr");
                 var item1, item2, item3;
                 item1 = document.createElement("td");
@@ -122,6 +123,7 @@ if (qBox) {
         });
     }
 }
+
 
 if (btnHistory1) {
     // call back function from fetchMongoData (necessary for async functions)/

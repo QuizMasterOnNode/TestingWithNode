@@ -8,6 +8,7 @@ mongoose.connect(
 const app = express();
 const path = require("path");
 const { MongoClient, Db } = require("mongodb");
+const { clearScreenDown } = require("readline");
 
 const uri =
     //"mongodb+srv://cortezB:cortezPassword@quizcluster.5oc2z.mongodb.net/Quiz-Capstone?retryWrites=true&w=majority"
@@ -33,27 +34,28 @@ async function main() {
 }
 
 // console logging the databases inside of the MongoDB database.
-async function listDatabases(client) {
-    const databasesList = await client.db().admin().listDatabases();
-    console.log("Databases:");
-    databasesList.databases.forEach((db) => {
-        console.log(`- ${db.name}`);
-    });
-}
+// async function listDatabases(client) {
+//     const databasesList = await client.db().admin().listDatabases();
+//     console.log("Databases:");
+//     databasesList.databases.forEach((db) => {
+//         console.log(`- ${db.name}`);
+//     });
+// }
 
 // CREATE (create listing)
-async function createListing(client, newListing) {
-    const result = await client
-        .db("Quiz-Capstone")
-        .collection("Quiz")
-        .insertOne(newListing);
+// async function createListing(client, newListing) {
+//     const result = await client
+//         .db("Quiz-Capstone")
+//         .collection("Quiz")
+//         .insertOne(newListing);
 
-    console.log(
-        `New listing created with the following id: ${result.insertedId}`
-    );
-}
+//     console.log(
+//         `New listing created with the following id: ${result.insertedId}`
+//     );
+// }
 
 // CREATE (create listing)
+
 async function createUserListing(client, newListing) {
     const result = await client
         .db("Quiz-Capstone")
@@ -86,6 +88,7 @@ async function findOneDisplayNameByName(client, nameOfEmail) {
 }
 
 // READ (find listing)
+//Find quiz
 async function findOneListingByName(client, nameOfListing) {
     const result = await client
         .db("Quiz-Capstone")
@@ -102,19 +105,41 @@ async function findOneListingByName(client, nameOfListing) {
     }
 }
 
-//Query to find a student info based on email
-async function findStudent(client, sEmail) {
-    const result = await client
-        .db("Quiz-Capstone")
-        .collection("Student")
-        .findOne({ studentEmail: sEmail });
 
-    if (result) {
-        return result;
-    } else {
-        console.log(`No listings found with the name '${sEmail}'`);
-    }
+//Query to find a student info based on email
+//This function is used to display a student's past quiz scores
+async function findStudent(client, sEmail) {
+    const cursor = await client.db("Quiz-Capstone" ).collection("Student").find({studentEmail: sEmail});
+    const allValues = await cursor.toArray();
+    var scores = allValues[0].scores;
+    //Sort scores based on quiz name
+    scores.sort(function(a,b) {
+        const nameA = a.quiz;
+        const nameB = b.quiz;
+        if(nameA<nameB){
+            return -1;
+        }
+        if(nameA>nameB){
+            return 1;
+        }
+        return 0;
+    });
+    console.log(scores);
+    
+    return scores;
+    
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // calling main and catching for errors if any
 main().catch(console.error);
