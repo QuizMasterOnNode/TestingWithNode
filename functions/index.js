@@ -1,11 +1,14 @@
 const functions = require("firebase-functions");
 const express = require("express");
-var bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/Quiz-Capstone?retryWrites=true&w=majority")
+var bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+mongoose.connect(
+    "mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/Quiz-Capstone?retryWrites=true&w=majority"
+);
 const app = express();
 const path = require("path");
 const { MongoClient, Db } = require("mongodb");
+const { clearScreenDown } = require("readline");
 
 const uri =
     //"mongodb+srv://cortezB:cortezPassword@quizcluster.5oc2z.mongodb.net/Quiz-Capstone?retryWrites=true&w=majority"
@@ -13,12 +16,17 @@ const uri =
 const client = new MongoClient(uri);
 app.use(express.static(path.join(__dirname, "static")));
 //test
+<<<<<<< HEAD
 app.use =(bodyParser.json());
 app.use =(bodyParser.urlencoded({extended: true}));
 var today = new Date();
 var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 var dateTime = date+' '+time; 
+=======
+app.use = bodyParser.json();
+app.use = bodyParser.urlencoded({ extended: true });
+>>>>>>> 442e4e88d040b087dcd91ea6cbd9d06567fae38f
 
 //app.use =(express.urlencoded({extended: true}));
 //app.use =(express.json()); // To parse the incoming request with JSON payloads
@@ -27,7 +35,6 @@ async function main() {
     try {
         // Will connect to database as soon as user enters the site.
         await client.connect();
-
     } catch (e) {
         console.error(e);
     } finally {
@@ -36,6 +43,7 @@ async function main() {
 }
 
 // console logging the databases inside of the MongoDB database.
+<<<<<<< HEAD
 async function listDatabases(client) {
     const databasesList = await client.db().admin().listDatabases();
     console.log("Databases:");
@@ -58,12 +66,34 @@ async function createScore(client, newListing){
     const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: newListing}, {$set: {"scores": myArray}})
 }
 */
+=======
+// async function listDatabases(client) {
+//     const databasesList = await client.db().admin().listDatabases();
+//     console.log("Databases:");
+//     databasesList.databases.forEach((db) => {
+//         console.log(`- ${db.name}`);
+//     });
+// }
+>>>>>>> 442e4e88d040b087dcd91ea6cbd9d06567fae38f
 
 // CREATE (create listing)
-async function createListing(client, newListing) {
+// async function createListing(client, newListing) {
+//     const result = await client
+//         .db("Quiz-Capstone")
+//         .collection("Quiz")
+//         .insertOne(newListing);
+
+//     console.log(
+//         `New listing created with the following id: ${result.insertedId}`
+//     );
+// }
+
+// CREATE (create listing)
+
+async function createUserListing(client, newListing) {
     const result = await client
         .db("Quiz-Capstone")
-        .collection("Quiz")
+        .collection("Student")
         .insertOne(newListing);
 
     console.log(
@@ -71,6 +101,7 @@ async function createListing(client, newListing) {
     );
 }
 
+<<<<<<< HEAD
 // CREATE (create listing)
 async function createUserListing(client, newListing){
     const result = await client.db("Quiz-Capstone").collection("Student").insertOne(newListing);
@@ -92,23 +123,30 @@ myArray.push(newScore)
 console.log(myArray);
 const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: newListing}, {$set: {"scores": myArray}})
 }
+=======
+>>>>>>> 442e4e88d040b087dcd91ea6cbd9d06567fae38f
 // READ (find listing)
-async function findOneDisplayNameByName(client, nameOfEmail){
-    const result = await client.db("Quiz-Capstone").collection("Student").findOne({studentEmail:
-        nameOfEmail});
+async function findOneDisplayNameByName(client, nameOfEmail) {
+    const result = await client
+        .db("Quiz-Capstone")
+        .collection("Student")
+        .findOne({ studentEmail: nameOfEmail });
 
-    if(result){
-        console.log(`Found a listing in the collection with the name '${nameOfEmail}'`);
+    if (result) {
+        console.log(
+            `Found a listing in the collection with the name '${nameOfEmail}'`
+        );
         console.log(result);
         return result;
-    }else {
+    } else {
         console.log(`No listings found with the name '${nameOfEmail}'`);
         //console.log(result);
         return result;
-    } 
+    }
 }
 
 // READ (find listing)
+//Find quiz
 async function findOneListingByName(client, nameOfListing) {
     const result = await client
         .db("Quiz-Capstone")
@@ -125,19 +163,41 @@ async function findOneListingByName(client, nameOfListing) {
     }
 }
 
-//Query to find a student info based on email
-async function findStudent(client, sEmail) {
-    const result = await client
-        .db("Quiz-Capstone")
-        .collection("Student")
-        .findOne({ studentEmail: sEmail });
 
-    if (result) {
-        return result;
-    } else {
-        console.log(`No listings found with the name '${sEmail}'`);
-    }
+//Query to find a student info based on email
+//This function is used to display a student's past quiz scores
+async function findStudent(client, sEmail) {
+    const cursor = await client.db("Quiz-Capstone" ).collection("Student").find({studentEmail: sEmail});
+    const allValues = await cursor.toArray();
+    var scores = allValues[0].scores;
+    //Sort scores based on quiz name
+    scores.sort(function(a,b) {
+        const nameA = a.quiz;
+        const nameB = b.quiz;
+        if(nameA<nameB){
+            return -1;
+        }
+        if(nameA>nameB){
+            return 1;
+        }
+        return 0;
+    });
+    console.log(scores);
+    
+    return scores;
+    
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // calling main and catching for errors if any
 main().catch(console.error);
@@ -151,15 +211,6 @@ app.get("/about", (req, res) => {
     res.sendFile(__dirname + "/static/about.html");
 });
 
-app.get("/hello", (req, res) => {
-    res.send("Hi there!");
-    console.log("OKAY");
-});
-
-app.get("/api", (req, res) => {
-    res.json({ bongs: "BONG ".repeat(hours) });
-});
-
 app.get("/HST01", (req, res) => {
     findOneListingByName(client, "HST01").then(function(result) {
         res.type("application/json");
@@ -167,8 +218,22 @@ app.get("/HST01", (req, res) => {
     });
 });
 
+app.get("/HST02", (req, res) => {
+    findOneListingByName(client, "HST02").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
 app.get("/SCI01", (req, res) => {
     findOneListingByName(client, "SCI01").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
+app.get("/CIS02", (req, res) => {
+    findOneListingByName(client, "CIS02").then(function(result) {
         res.type("application/json");
         res.send(`${JSON.stringify(result)}`);
     });
@@ -188,21 +253,37 @@ app.get("/CIS01", (req, res) => {
     });
 });
 
+app.get("/MTH01", (req, res) => {
+    findOneListingByName(client, "MTH01").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
+app.get("/MTH02", (req, res) => {
+    findOneListingByName(client, "MTH02").then(function(result) {
+        res.type("application/json");
+        res.send(`${JSON.stringify(result)}`);
+    });
+});
+
 // Create a user route to create user listing in the database
 app.get("/user", (req, res) => {
     const user_email = req.query.email;
     const user_display_name = req.query.displayName;
     // Takes in user email and display name to create a document inside the database.
-    createUserListing(client, {studentEmail:user_email,display_name:user_display_name});
+    createUserListing(client, {
+        studentEmail: user_email,
+        display_name: user_display_name,
+    });
 });
 
 // get the user display name
 app.get("/userDisplayName", (req, res) => {
     const user_email = req.query.email;
-    findOneDisplayNameByName(client, user_email).then(function(result){
-        res.type('application/json');
+    findOneDisplayNameByName(client, user_email).then(function(result) {
+        res.type("application/json");
         res.send(`${JSON.stringify(result)}`);
-        
     });
 });
 
@@ -215,6 +296,7 @@ app.get("/qResults", (req, res) => {
         res.send(`${JSON.stringify(result)}`);
     });
 });
+<<<<<<< HEAD
 //test
 //var userModel = require('./models/user/user.model.server');
 //userModel.createUser({
@@ -237,6 +319,7 @@ app.get("/qResults", (req, res) => {
     userService(app);
     require('./models/services/submission.service.server')(app);
     //test -cortez
+=======
+>>>>>>> 442e4e88d040b087dcd91ea6cbd9d06567fae38f
 // https request
 exports.app = functions.https.onRequest(app);
-
