@@ -16,17 +16,8 @@ const uri =
 const client = new MongoClient(uri);
 app.use(express.static(path.join(__dirname, "static")));
 //test
-<<<<<<< HEAD
-app.use =(bodyParser.json());
-app.use =(bodyParser.urlencoded({extended: true}));
-var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-var dateTime = date+' '+time; 
-=======
 app.use = bodyParser.json();
 app.use = bodyParser.urlencoded({ extended: true });
->>>>>>> 442e4e88d040b087dcd91ea6cbd9d06567fae38f
 
 //app.use =(express.urlencoded({extended: true}));
 //app.use =(express.json()); // To parse the incoming request with JSON payloads
@@ -43,30 +34,6 @@ async function main() {
 }
 
 // console logging the databases inside of the MongoDB database.
-<<<<<<< HEAD
-async function listDatabases(client) {
-    const databasesList = await client.db().admin().listDatabases();
-    console.log("Databases:");
-    databasesList.databases.forEach((db) => {
-        console.log(`- ${db.name}`);
-    });
-}
-/*
-async function createScore(client, newListing){
-
-    const result = await client.db("Quiz-Capstone").collection("Student").findOne({studentEmail: newListing});
-    var myArray = await result.scores;
-    var newScore = {quiz: "HST01",
-    dateTaken: Date(),
-    score: 45.6,
-    missed: [1,3]
-    }
-    myArray.push(newScore)
-    console.log(myArray);
-    const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: newListing}, {$set: {"scores": myArray}})
-}
-*/
-=======
 // async function listDatabases(client) {
 //     const databasesList = await client.db().admin().listDatabases();
 //     console.log("Databases:");
@@ -74,7 +41,6 @@ async function createScore(client, newListing){
 //         console.log(`- ${db.name}`);
 //     });
 // }
->>>>>>> 442e4e88d040b087dcd91ea6cbd9d06567fae38f
 
 // CREATE (create listing)
 // async function createListing(client, newListing) {
@@ -101,30 +67,6 @@ async function createUserListing(client, newListing) {
     );
 }
 
-<<<<<<< HEAD
-// CREATE (create listing)
-async function createUserListing(client, newListing){
-    const result = await client.db("Quiz-Capstone").collection("Student").insertOne(newListing);
-
-    console.log(`New listing created with the following id: ${result.insertedId}`);
-}
-//Create (create listing)
-
-
-async function createScore(client, newListing){
-    const result = await client.db("Quiz-Capstone").collection("Student").findOne({studentEmail: newListing});
-    var myArray = await result.scores;
-    var newScore = {quiz: "HST01",
-    dateTaken: Date(),
-    score: 45.6,
-    missed: [1,3]
-    }
-myArray.push(newScore)
-console.log(myArray);
-const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: newListing}, {$set: {"scores": myArray}})
-}
-=======
->>>>>>> 442e4e88d040b087dcd91ea6cbd9d06567fae38f
 // READ (find listing)
 async function findOneDisplayNameByName(client, nameOfEmail) {
     const result = await client
@@ -296,7 +238,6 @@ app.get("/qResults", (req, res) => {
         res.send(`${JSON.stringify(result)}`);
     });
 });
-<<<<<<< HEAD
 //test
 //var userModel = require('./models/user/user.model.server');
 //userModel.createUser({
@@ -319,7 +260,5 @@ app.get("/qResults", (req, res) => {
     userService(app);
     require('./models/services/submission.service.server')(app);
     //test -cortez
-=======
->>>>>>> 442e4e88d040b087dcd91ea6cbd9d06567fae38f
 // https request
 exports.app = functions.https.onRequest(app);
