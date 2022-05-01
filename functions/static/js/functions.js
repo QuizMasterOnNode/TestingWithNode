@@ -503,101 +503,6 @@ if (btnScience2) {
     });
 }
 
-if (btnEngineering1) {
-    // call back function from fetchMongoData (necessary for async functions)/
-    fetchMEC01().then(function(result) {
-        btnEngineering1.addEventListener("click", function() {
-            var modal = document.getElementById("quizModal1");
-            var span = document.getElementsByClassName("close")[0];
-            let btnConfirm1 = document.getElementById("ok1");
-            let btnCancel1 = document.getElementById("cancel1");
-            modal.style.display = "block";
-            span.onclick = function() {
-                modal.style.display = "none";
-            };
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            };
-            btnConfirm1.addEventListener("click", function() {
-                let quizPage = window.open("quizPage.html");
-                quizPage.addEventListener("DOMContentLoaded", () => {
-                    // Now we can access elements on the quiz page
-                    quizPage.document.getElementById("quizHeading1").innerHTML =
-                        result.category + " - " + result.quizName;
-                    var questionCount = Object.keys(result.quizQuestions).length;
-                    var quizForm = document.createElement("form");
-                    quizForm.id = "quizForm";
-                    quizPage.document.getElementById("questions").appendChild(quizForm);
-                    for (let i = 0; i < questionCount; i++) {
-                        var questionHeading = document.createElement("h4");
-                        questionHeading.id = "questionHeading";
-                        questionHeading.innerHTML = "Question" + " " + (i + 1);
-                        var question = document.createElement("div");
-                        question.id = "question" + (i + 1);
-                        var newline2 = document.createElement("br");
-                        var newline4 = document.createElement("br");
-                        var ptag = document.createElement("p");
-                        var questionText = document.createTextNode(
-                            result.quizQuestions[i].question
-                        );
-                        ptag.appendChild(questionText);
-                        question.appendChild(questionHeading);
-                        question.appendChild(newline4);
-                        question.appendChild(ptag);
-                        question.appendChild(newline2);
-                        quizPage.document.getElementById("quizForm").appendChild(question);
-
-                        var optionCount = Object.keys(
-                            result.quizQuestions[i].options
-                        ).length;
-                        var options = document.createElement("div");
-                        options.id = "question" + (i + 1) + "Options";
-                        for (let j = 0; j < optionCount; j++) {
-                            var radiobox = document.createElement("input");
-                            radiobox.type = "radio";
-                            radiobox.id = "q" + (i + 1) + "Option" + (j + 1);
-                            radiobox.name = "q" + (i + 1) + "Options";
-                            radiobox.value = i + 1;
-
-                            var label = document.createElement("label");
-                            label.htmlFor = "q" + (i + 1) + "Option" + (j + 1);
-
-                            var option = document.createTextNode(
-                                " " + result.quizQuestions[i].options[j]
-                            );
-                            label.appendChild(option);
-
-                            var newline = document.createElement("br");
-                            var newline3 = document.createElement("br");
-
-                            options.appendChild(radiobox);
-                            options.appendChild(label);
-                            options.appendChild(newline);
-                            options.appendChild(newline3);
-
-                            quizPage.document
-                                .getElementById("question" + (i + 1))
-                                .appendChild(options);
-                        }
-                    }
-                    var sbDiv = document.createElement("div");
-                    sbDiv.id = "submit_button";
-                    var submitButton = document.createElement("button");
-                    submitButton.innerHTML = "Submit";
-                    sbDiv.appendChild(submitButton);
-                    quizPage.document.getElementById("quizForm").appendChild(sbDiv);
-                });
-                modal.style.display = "none";
-            });
-            btnCancel1.addEventListener("click", function() {
-                modal.style.display = "none";
-            });
-        });
-    });
-}
-
 if (btnEngineering2) {
     // call back function from fetchMongoData (necessary for async functions)/
     fetchCIS01().then(function(result) {
@@ -896,6 +801,149 @@ if (btnMath2) {
         });
     });
 }
+if (btnEngineering1) {
+    // call back function from fetchMongoData (necessary for async functions)/
+    fetchMEC01().then(function(result) {
+        btnEngineering1.addEventListener("click", function() {
+            var modal = document.getElementById("quizModal1");
+            var span = document.getElementsByClassName("close")[0];
+            let btnConfirm1 = document.getElementById("ok1");
+            let btnCancel1 = document.getElementById("cancel1");
+            modal.style.display = "block";
+            span.onclick = function() {
+                modal.style.display = "none";
+            };
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+            btnConfirm1.addEventListener("click", function() {
+                let quizPage = window.open("quizPage.html");
+                quizPage.addEventListener("DOMContentLoaded", () => {
+                    // Now we can access elements on the quiz page
+                    quizPage.document.getElementById("quizHeading1").innerHTML =
+                        result.category + " - " + result.quizName;
+                    var questionCount = Object.keys(result.quizQuestions).length;
+                    var quizForm = document.createElement("form");
+                    quizForm.id = "quizForm";
+                    quizPage.document.getElementById("questions").appendChild(quizForm);
+                    for (let i = 0; i < questionCount; i++) {
+                        var questionHeading = document.createElement("h4");
+                        questionHeading.id = "questionHeading";
+                        questionHeading.innerHTML = "Question" + " " + (i + 1);
+                        var question = document.createElement("div");
+                        question.id = "question" + (i + 1);
+                        var newline2 = document.createElement("br");
+                        var newline4 = document.createElement("br");
+                        var ptag = document.createElement("p");
+                        var questionText = document.createTextNode(
+                            result.quizQuestions[i].question
+                        );
+                        ptag.appendChild(questionText);
+                        question.appendChild(questionHeading);
+                        question.appendChild(newline4);
+                        question.appendChild(ptag);
+                        question.appendChild(newline2);
+                        quizPage.document.getElementById("quizForm").appendChild(question);
+
+                        var optionCount = Object.keys(
+                            result.quizQuestions[i].options
+                        ).length;
+                        var options = document.createElement("div");
+                        options.id = "question" + (i + 1) + "Options";
+                        for (let j = 0; j < optionCount; j++) {
+                            var radiobox = document.createElement("input");
+                            radiobox.type = "radio";
+                            radiobox.id = "q" + (i + 1) + "Option" + (j + 1);
+                            radiobox.name = "q" + (i + 1) + "Options";
+                           
+
+                            var label = document.createElement("label");
+                            label.htmlFor = "q" + (i + 1) + "Option" + (j + 1);
+
+                            var option = document.createTextNode(
+                                " " + result.quizQuestions[i].options[j]
+                            );
+                            //this sets value of radio box to the option
+                            radiobox.value= " " + result.quizQuestions[i].options[j];
+                            label.appendChild(option);
+
+                            var newline = document.createElement("br");
+                            var newline3 = document.createElement("br");
+
+                            options.appendChild(radiobox);
+                            options.appendChild(label);
+                            options.appendChild(newline);
+                            options.appendChild(newline3);
+
+                            quizPage.document
+                                .getElementById("question" + (i + 1))
+                                .appendChild(options);
+                        }
+                    }
+                    var sbDiv = document.createElement("div");
+                    sbDiv.id = "submit_button";
+                    var submitButton = document.createElement("button");
+                    submitButton.innerHTML = "Submit";
+                    submitButton.id ="btnSubmit";
+                    submitButton.type = "button";
+                    sbDiv.appendChild(submitButton);
+                    quizPage.document.getElementById("quizForm").appendChild(sbDiv);
+
+                    //add submit event handler
+                    quizPage.document.querySelector("#btnSubmit").addEventListener("click", function(){
+        
+                        let quizResults = window.open("quizResult.html");
+                        quizResults.addEventListener("DOMContentLoaded", () => {
+                            
+                            var answer =[] ;
+                        for (let i =0; i< questionCount; i++){
+                            var radio = quizPage.document.getElementsByName("q" + (i+1) + "Options");
+                            for(let i = 0; i < radio.length; i++){
+                                if (radio[i].checked){
+                                answer.push(radio[i].value);
+                            }     
+                        }
+                        console.log(radio);
+
+                         }
+                         for(let i =0; i < questionCount; i++){
+                            quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
+                            quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
+                         }
+                    });
+                    });
+
+                });
+
+                modal.style.display = "none";
+            });
+            
+            btnCancel1.addEventListener("click", function() {
+                modal.style.display = "none";
+            });
+
+        });
+
+    });
+}
+function submitForm(){
+
+    var list = document.getElementsByType("radio");
+    var answers;
+    for(i =0; i <list.length; i++){
+        if(list[i].checked){
+            answers[i]= list[i].value;
+        }
+    }
+    
+    var text = document.createTextNode(answers);
+    quizResults.document.getElementById("userAnswer").append(text);
+      
+
+}
+//function to get form data
 
 //functions to load quiz descriptions
 // History quiz 1
