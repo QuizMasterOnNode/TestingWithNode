@@ -765,8 +765,9 @@ if (btnMath2) {
                             radiobox.type = "radio";
                             radiobox.id = "q" + (i + 1) + "Option" + (j + 1);
                             radiobox.name = "q" + (i + 1) + "Options";
-                            radiobox.value = i + 1;
-
+                            //radiobox.value = i + 1;
+                            //this sets value of radio box to the option
+                            radiobox.value= " " + result.quizQuestions[i].options[j];
                             var label = document.createElement("label");
                             label.htmlFor = "q" + (i + 1) + "Option" + (j + 1);
 
@@ -792,8 +793,37 @@ if (btnMath2) {
                     sbDiv.id = "submit_button";
                     var submitButton = document.createElement("button");
                     submitButton.innerHTML = "Submit";
+                    submitButton.id ="btnSubmit";
+                    submitButton.type = "button";
                     sbDiv.appendChild(submitButton);
                     quizPage.document.getElementById("quizForm").appendChild(sbDiv);
+
+                    //add submit event handler
+                    quizPage.document.querySelector("#btnSubmit").addEventListener("click", function(){
+        
+                        let quizResults = window.open("quizResult.html");
+                        quizResults.addEventListener("DOMContentLoaded", () => {
+                        //find which buttons are selected    
+                        var answer =[] ;
+                        for (let i =0; i< questionCount; i++){
+                            var radio = quizPage.document.getElementsByName("q" + (i+1) + "Options");
+                            for(let i = 0; i < radio.length; i++){
+                                if (radio[i].checked){
+                                answer.push(radio[i].value);
+                            }     
+                        }
+                        //console.log(radio);
+
+                         }
+                         //output results
+                         for(let i =0; i < questionCount; i++){
+                            quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
+                            quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
+                         }
+
+                    });
+                    });
+                    
                 });
                 modal.style.display = "none";
             });
@@ -868,7 +898,7 @@ if (btnEngineering1) {
                                 " " + result.quizQuestions[i].options[j]
                             );
                             //this sets value of radio box to the option
-                            radiobox.value= " " + result.quizQuestions[i].options[j];
+                            radiobox.value= result.quizQuestions[i].options[j];
                             label.appendChild(option);
 
                             var newline = document.createElement("br");
@@ -898,22 +928,32 @@ if (btnEngineering1) {
         
                         let quizResults = window.open("quizResult.html");
                         quizResults.addEventListener("DOMContentLoaded", () => {
-                            
-                            var answer =[] ;
+                        //find which buttons are selected    
+                        var answer =[] ;
                         for (let i =0; i< questionCount; i++){
                             var radio = quizPage.document.getElementsByName("q" + (i+1) + "Options");
                             for(let i = 0; i < radio.length; i++){
                                 if (radio[i].checked){
                                 answer.push(radio[i].value);
-                            }     
-                        }
-                        console.log(radio);
+                                }     
+                            }
+                        //console.log(radio);
 
                          }
+                        //get score
+                         var score = getScore(answer, result);
+                         var pointsArray = getPointsPerQuestion(answer, result);
+                        
+                         //output results
                          for(let i =0; i < questionCount; i++){
                             quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
                             quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
+                            quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
+                            quizResults.document.getElementById("totalPoints").innerHTML = score;
+                            quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
                          }
+
+                        
                     });
                     });
 
@@ -930,23 +970,39 @@ if (btnEngineering1) {
 
     });
 }
-function submitForm(){
-
-    var list = document.getElementsByType("radio");
-    var answers;
-    for(i =0; i <list.length; i++){
-        if(list[i].checked){
-            answers[i]= list[i].value;
+//this function calculates the score
+function getScore(answerList, result){
+    var userPoints = 0;
+    var score;
+    //console.log(answerList);
+    //console.log(result)
+    for(let i =0; i < Object.keys(result.quizQuestions).length; i++){
+        if (answerList[i] == result.quizQuestions[i].answer ){
+            userPoints += parseInt(result.quizQuestions[i].value);
+            console.log(userPoints);
         }
+        //calculate score
+        //console.log(result.totalPoints);
+        score = (userPoints / parseInt(result.totalPoints)) * 100  ;
     }
-    
-    var text = document.createTextNode(answers);
-    quizResults.document.getElementById("userAnswer").append(text);
-      
-
+    //console.log(score);
+    return score.toFixed(2);
 }
-//function to get form data
-
+//this function returns an array of points earned by question
+function getPointsPerQuestion(answerList, result){
+    var pointsList = [];
+    for(let i =0; i < Object.keys(result.quizQuestions).length; i++){
+        
+        if (answerList[i] == result.quizQuestions[i].answer ){
+            pointsList.push(result.quizQuestions[i].value);
+        }
+        else{
+            pointsList.push("0");
+        }
+        
+    }
+    return pointsList;
+}
 //functions to load quiz descriptions
 // History quiz 1
 let HST01 = document.getElementById("HST01");
