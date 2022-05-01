@@ -1,6 +1,11 @@
 module.exports = app => {
+  import('../../static/js/authentication.js').then(({dumpSession2:user})=>{
 
-    const userModel = require('../models/user/user.model.server');
+    
+  }).catch((err)=>{
+      console.error('Student does not exist');
+  })
+    const userModel = require('../user/user.model.server');
   
     findAllUsers = (req, res) =>
       userModel.findAllUsers()
@@ -10,7 +15,7 @@ module.exports = app => {
   
     login = (req, res) => {
       const user = req.body;
-      userModel.findUserByCredentials(user.username, user.password)
+      userModel.findUserByCredentials(user.studentEmail, user.password)
         .then(user => {
           req.session['currentUser'] = user;
           res.send(req.session['currentUser']);

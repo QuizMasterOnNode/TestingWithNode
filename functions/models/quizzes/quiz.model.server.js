@@ -23,7 +23,7 @@ deleteQuiz = quizId =>
   quizModel.remove({_id: quizId})
 
 addQuestion = (quizId, questionId) =>
-  quizModel.update({_id: quizId}, {
+  quizModel.updateOne({_id: quizId}, {
     $push: {questions: questionId}
   })
 

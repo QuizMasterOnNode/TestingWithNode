@@ -1,6 +1,6 @@
 module.exports = app => {
-
-    const quizModel = require('../models/quizzes/quiz.model.server');
+  //module.exports = function (app){
+    const quizModel = require('./quizzes/quiz.model.server');
   
     createQuiz = (req, res) => {
       quizModel.createQuiz(req.body)

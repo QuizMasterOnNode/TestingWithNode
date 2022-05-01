@@ -1,6 +1,24 @@
+const mongoose = require('mongoose');
+
+var submissionSchema = mongoose.Schema({
+    //myArray: [],
+    dateTaken:String,
+    username: String,
+    quizId: String,
+    answers: [],
+    score: [Number],
+    missed:[Number]
+}, {collection: 'submission'});
+
+module.exports = submissionSchema;
+
+
+
+/*
 const mongoose = require('mongoose')
 module.exports = mongoose.Schema({
-  student: {
+
+ student: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'UserModel'
   },
@@ -22,3 +40,4 @@ module.exports = mongoose.Schema({
     }
   }]
 }, {collection: 'submission'})
+*/

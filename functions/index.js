@@ -15,6 +15,10 @@ app.use(express.static(path.join(__dirname, "static")));
 //test
 app.use =(bodyParser.json());
 app.use =(bodyParser.urlencoded({extended: true}));
+var today = new Date();
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time; 
 
 //app.use =(express.urlencoded({extended: true}));
 //app.use =(express.json()); // To parse the incoming request with JSON payloads
@@ -39,6 +43,21 @@ async function listDatabases(client) {
         console.log(`- ${db.name}`);
     });
 }
+/*
+async function createScore(client, newListing){
+
+    const result = await client.db("Quiz-Capstone").collection("Student").findOne({studentEmail: newListing});
+    var myArray = await result.scores;
+    var newScore = {quiz: "HST01",
+    dateTaken: Date(),
+    score: 45.6,
+    missed: [1,3]
+    }
+    myArray.push(newScore)
+    console.log(myArray);
+    const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: newListing}, {$set: {"scores": myArray}})
+}
+*/
 
 // CREATE (create listing)
 async function createListing(client, newListing) {
@@ -58,7 +77,21 @@ async function createUserListing(client, newListing){
 
     console.log(`New listing created with the following id: ${result.insertedId}`);
 }
+//Create (create listing)
 
+
+async function createScore(client, newListing){
+    const result = await client.db("Quiz-Capstone").collection("Student").findOne({studentEmail: newListing});
+    var myArray = await result.scores;
+    var newScore = {quiz: "HST01",
+    dateTaken: Date(),
+    score: 45.6,
+    missed: [1,3]
+    }
+myArray.push(newScore)
+console.log(myArray);
+const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: newListing}, {$set: {"scores": myArray}})
+}
 // READ (find listing)
 async function findOneDisplayNameByName(client, nameOfEmail){
     const result = await client.db("Quiz-Capstone").collection("Student").findOne({studentEmail:
@@ -189,9 +222,21 @@ app.get("/qResults", (req, res) => {
     //});
     //var userService = require('./models/services/user.service.server');
     //userService(app);
-    var userService = require('./models/services/question.service.server');
+   /* var submissionModel = require('./models/submission/submission.model.server');
+    submissionModel.createSubmission({
+     //   const result = await client.db("Quiz-Capstone").collection("submission").findAllSubmissionsForStudent({username: newListing});
+        dateTaken:dateTime
+        username:
+    }); */ /*
+    var Submission = require('./models/services/submission.service.server');
+    Submission(app);
+    //app.listen(3000)*/
+
+    //refrencing submission paths -Cortez
+    const userService = require('./models/services/users.service.server'); //(app);
     userService(app);
-    //testnp
+    require('./models/services/submission.service.server')(app);
+    //test -cortez
 // https request
 exports.app = functions.https.onRequest(app);
 

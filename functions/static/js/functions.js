@@ -182,6 +182,17 @@ if (btnHistory1) {
                     sbDiv.appendChild(submitButton);
                     quizPage.document.getElementById("quizForm").appendChild(sbDiv);
                 });
+                quizPage.document.querySelector("#btnSubmit").addEventListener("click", function(){
+                    let quizResults = window.open("quizResult.html");
+                    quizResults.addEventListener("DOMContentLoaded", () =>{
+    
+    
+    
+                        var text = document.createTextNode("hello");
+                        console.log(quizResult.document.getElementById("answer"));
+                        quizResults.document.getElementById("answer").append("hello");
+                    });
+                });
                 modal.style.display = "none";
             });
             btnCancel1.addEventListener("click", function() {

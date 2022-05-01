@@ -2,6 +2,13 @@ var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('UserModel', userSchema);
 
+//import {dumpSession} from "../js/authentication.js";
+import('../../static/js/authentication.js').then(({dumpSession2:user})=>{
+   var studentEmail = user.email; 
+   var password = user.password;
+}).catch((err)=>{
+    console.error('Student Emial does not exist');
+})
 function createUser(user){
     return userModel.create(user);
     }
@@ -9,8 +16,8 @@ function createUser(user){
  function findAllUsers(){
     return userModel.find();
  }
- function findUserByCredentials (username, password){
- userModel.findOne({username: username, password: password});
+ function findUserByCredentials (studentEmail, password){
+ userModel.findOne({studentEmail: studentEmail, password: password});
  }
  function findUsersById(userId){
    return userModel.findById(userId);

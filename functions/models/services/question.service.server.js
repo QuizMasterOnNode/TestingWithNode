@@ -1,5 +1,5 @@
 module.exports = app => {
-    const questionModel = require('../models/quizzes/question.model.server')
+   // const questionModel = require('./models/quizzes/question.model.server')
   
     createQuestion = (req, res) =>
       questionModel

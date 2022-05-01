@@ -162,7 +162,15 @@ async function fetchUserDisplayName(email){
 
 async function dumpSession() {
     //console.log(sessionStorage.getItem("email"));
+
     return sessionStorage.getItem("email");
 };
 
+async function dumpSession2() {
+    //console.log(sessionStorage.getItem("email"));
+    return sessionStorage.getItem("user");
+};
+
 export {dumpSession};
+export {dumpSession2};
+
