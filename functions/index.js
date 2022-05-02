@@ -1,10 +1,7 @@
 const functions = require("firebase-functions");
 const express = require("express");
 var bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-mongoose.connect(
-    "mongodb+srv://HenriA:HenrisPassword@quizcluster.5oc2z.mongodb.net/Quiz-Capstone?retryWrites=true&w=majority"
-);
+
 const app = express();
 const path = require("path");
 const { MongoClient, Db } = require("mongodb");
@@ -33,28 +30,24 @@ async function main() {
     }
 }
 
-// console logging the databases inside of the MongoDB database.
-// async function listDatabases(client) {
-//     const databasesList = await client.db().admin().listDatabases();
-//     console.log("Databases:");
-//     databasesList.databases.forEach((db) => {
-//         console.log(`- ${db.name}`);
-//     });
-// }
+//Create a new score in the database
+async function createScore(client, email, quizName, quizScore) {
+    //Retrieve student whose score will be added
+    const cursor = await client.db("Quiz-Capstone" ).collection("Student").find({studentEmail: email});
+    //Cursor is returned, turn to array and then retrieve the first (and only) elements from the array.
+    const allValues = await cursor.toArray();
+    var scores = allValues[0].scores;
+    //Create a new score object. The date object is created so that ISO time will be stored in Mongo
+    var newScore = {
+    quiz: quizName,
+    dateTaken: new Date(),
+    score: quizScore}
+    scores.push(newScore);
+    //Update student with the new array.
+    const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: email}, {$set: {"scores": scores}});
+    
+}
 
-// CREATE (create listing)
-// async function createListing(client, newListing) {
-//     const result = await client
-//         .db("Quiz-Capstone")
-//         .collection("Quiz")
-//         .insertOne(newListing);
-
-//     console.log(
-//         `New listing created with the following id: ${result.insertedId}`
-//     );
-// }
-
-// CREATE (create listing)
 
 async function createUserListing(client, newListing) {
     const result = await client
@@ -129,22 +122,22 @@ async function findStudent(client, sEmail) {
     return scores;
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
 // calling main and catching for errors if any
 main().catch(console.error);
 
-// NODE ROUTES:
+// NODE ROUTES
+
+//Route to create a new score in the database
+//Requires user's email, quiz name, and score.
+app.get("/newScore", (req, res) => {
+    const user_email = req.query.email;
+    console.log(user_email);
+    const quiz = req.query.quiz;
+    const score = req.query.score;
+    createScore(client, user_email, quiz, score).then(res.send(""));
+
+})
+
 app.get("/home", (req, res) => {
     res.sendFile(__dirname + "/static/index.html");
 });
@@ -256,9 +249,7 @@ app.get("/qResults", (req, res) => {
     //app.listen(3000)*/
 
     //refrencing submission paths -Cortez
-    const userService = require('./models/services/users.service.server'); //(app);
-    userService(app);
-    require('./models/services/submission.service.server')(app);
-    //test -cortez
+    
+  
 // https request
 exports.app = functions.https.onRequest(app);

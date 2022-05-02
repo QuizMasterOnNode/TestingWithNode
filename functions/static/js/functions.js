@@ -22,6 +22,16 @@ let qBox = document.getElementById("quizBox");
 
 import { dumpSession } from "./authentication.js";
 
+const USER_EMAIL = await dumpSession();
+
+async function addNewScore(email, quiz, score) {
+    const myString = "newScore?email=" + email + "&quiz="+quiz+"&score="+score;
+    const data = await fetch(myString);
+    console.log(data);
+}
+
+
+
 //Fetch route to display quiz scores
 async function fetchQuizData(email) {
     const myString = "qResults?email=" + email;
@@ -963,7 +973,7 @@ if (btnEngineering1) {
                             quizResults.document.getElementById("totalPoints").innerHTML = score;
                             quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
                          }
-
+                         addNewScore(USER_EMAIL, result.quizName, score);
                         
                     });
                     });

@@ -166,11 +166,6 @@ async function dumpSession() {
     return sessionStorage.getItem("email");
 };
 
-async function dumpSession2() {
-    //console.log(sessionStorage.getItem("email"));
-    return sessionStorage.getItem("user");
-};
 
 export {dumpSession};
-export {dumpSession2};
 
