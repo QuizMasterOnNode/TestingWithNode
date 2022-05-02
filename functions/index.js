@@ -41,7 +41,7 @@ async function createScore(client, email, quizName, quizScore) {
     var newScore = {
     quiz: quizName,
     dateTaken: new Date(),
-    score: quizScore}
+    score: parseFloat(quizScore)}
     scores.push(newScore);
     //Update student with the new array.
     const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: email}, {$set: {"scores": scores}});

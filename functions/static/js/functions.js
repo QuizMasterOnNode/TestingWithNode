@@ -18,7 +18,7 @@ let btnEngineering1 = document.getElementById("btnEngineering1");
 let btnEngineering2 = document.getElementById("btnEngineering2");
 let btnMath1 = document.getElementById("btnMath1");
 let btnMath2 = document.getElementById("btnMath2");
-let qBox = document.getElementById("quizBox");
+let qBox = document.getElementById("resultBox");
 
 import { dumpSession } from "./authentication.js";
 
@@ -101,7 +101,6 @@ if (qBox) {
     if (userName == null) {
         console.log("ERROR");
     } else {
-        console.log("HELLO");
         fetchQuizData(userName).then(function(result) {
             var rTable = document.getElementById("rTable");
             var quizName;
@@ -242,16 +241,39 @@ if (btnHistory1) {
                          var pointsArray = getPointsPerQuestion(answer, result);
                         
                          //output results
-                         for(let i =0; i < questionCount; i++){
-                            quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
-                            quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
-                            quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
-                            quizResults.document.getElementById("totalPoints").innerHTML = score;
-                            quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
+                        //  for(let i =0; i < questionCount; i++){
+                        //     quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
+                        //     quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
+                        //     quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
+                        //     quizResults.document.getElementById("totalPoints").innerHTML = score;
+                        //     quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
+                        //  }
+
+                        var quizName, quizScore, points, yourAnswer;
+                         var rTable = quizResults.document.getElementById("resultTable");
+                         for(let i = 0; i < pointsArray.length; i++) {
+                             quizName = result.quizName;
+                             quizScore = score;
+                             points = pointsArray[i];
+
+                             var rRow = document.createElement("tr");
+                             var item1, item2, item3;
+                             item1 = document.createElement("td");
+                             item2 = document.createElement("td");
+                             item3 = document.createElement("td");
+
+                             item1.innerHTML = (i+1);
+                             item2.innerHTML = answer[i];
+                             item3.innerHTML = points;
+
+                             rRow.appendChild(item1);
+                             rRow.appendChild(item2);
+                             rRow.appendChild(item3);
+                             rTable.appendChild(rRow); 
                          }
 
                          addNewScore(USER_EMAIL, result.quizName, score);
-                        
+                         quizPage.close();
                     });
                     });
                 });
@@ -374,15 +396,31 @@ if (btnHistory2) {
                          var pointsArray = getPointsPerQuestion(answer, result);
                         
                          //output results
-                         for(let i =0; i < questionCount; i++){
-                            quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
-                            quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
-                            quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
-                            quizResults.document.getElementById("totalPoints").innerHTML = score;
-                            quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
+                         var quizName, quizScore, points, yourAnswer;
+                         var rTable = quizResults.document.getElementById("resultTable");
+                         for(let i = 0; i < pointsArray.length; i++) {
+                             quizName = result.quizName;
+                             quizScore = score;
+                             points = pointsArray[i];
+
+                             var rRow = document.createElement("tr");
+                             var item1, item2, item3;
+                             item1 = document.createElement("td");
+                             item2 = document.createElement("td");
+                             item3 = document.createElement("td");
+
+                             item1.innerHTML = (i+1);
+                             item2.innerHTML = answer[i];
+                             item3.innerHTML = points;
+
+                             rRow.appendChild(item1);
+                             rRow.appendChild(item2);
+                             rRow.appendChild(item3);
+                             rTable.appendChild(rRow); 
                          }
 
                          addNewScore(USER_EMAIL, result.quizName, score);
+                         quizPage.close();
                         
                     });
                     });
@@ -486,7 +524,6 @@ if (btnScience1) {
 
                     //add submit event handler
                     quizPage.document.querySelector("#btnSubmit").addEventListener("click", function(){
-        
                         let quizResults = window.open("quizResult.html");
                         quizResults.addEventListener("DOMContentLoaded", () => {
                         //find which buttons are selected    
@@ -505,18 +542,35 @@ if (btnScience1) {
                          var pointsArray = getPointsPerQuestion(answer, result);
                         
                          //output results
-                         for(let i =0; i < questionCount; i++){
-                            quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
-                            quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
-                            quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
-                            quizResults.document.getElementById("totalPoints").innerHTML = score;
-                            quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
+                         var quizName, quizScore, points, yourAnswer;
+                         var rTable = quizResults.document.getElementById("resultTable");
+                         for(let i = 0; i < pointsArray.length; i++) {
+                             quizName = result.quizName;
+                             quizScore = score;
+                             points = pointsArray[i];
+
+                             var rRow = document.createElement("tr");
+                             var item1, item2, item3;
+                             item1 = document.createElement("td");
+                             item2 = document.createElement("td");
+                             item3 = document.createElement("td");
+
+                             item1.innerHTML = (i+1);
+                             item2.innerHTML = answer[i];
+                             item3.innerHTML = points;
+
+                             rRow.appendChild(item1);
+                             rRow.appendChild(item2);
+                             rRow.appendChild(item3);
+                             rTable.appendChild(rRow); 
                          }
 
                          addNewScore(USER_EMAIL, result.quizName, score);
+                         quizPage.close();
                         
+                        });
                     });
-                    });
+
                 });
                 modal.style.display = "none";
             });
@@ -636,15 +690,31 @@ if (btnScience2) {
                             var pointsArray = getPointsPerQuestion(answer, result);
                         
                             //output results
-                            for(let i =0; i < questionCount; i++){
-                            quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
-                            quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
-                            quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
-                            quizResults.document.getElementById("totalPoints").innerHTML = score;
-                            quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
-                            }
+                            var quizName, quizScore, points, yourAnswer;
+                         var rTable = quizResults.document.getElementById("resultTable");
+                         for(let i = 0; i < pointsArray.length; i++) {
+                             quizName = result.quizName;
+                             quizScore = score;
+                             points = pointsArray[i];
 
-                            addNewScore(USER_EMAIL, result.quizName, score);
+                             var rRow = document.createElement("tr");
+                             var item1, item2, item3;
+                             item1 = document.createElement("td");
+                             item2 = document.createElement("td");
+                             item3 = document.createElement("td");
+
+                             item1.innerHTML = (i+1);
+                             item2.innerHTML = answer[i];
+                             item3.innerHTML = points;
+
+                             rRow.appendChild(item1);
+                             rRow.appendChild(item2);
+                             rRow.appendChild(item3);
+                             rTable.appendChild(rRow); 
+                         }
+
+                         addNewScore(USER_EMAIL, result.quizName, score);
+                         quizPage.close();
                         
                     });
                     });
@@ -767,15 +837,31 @@ if (btnEngineering2) {
                          var pointsArray = getPointsPerQuestion(answer, result);
                         
                          //output results
-                         for(let i =0; i < questionCount; i++){
-                            quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
-                            quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
-                            quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
-                            quizResults.document.getElementById("totalPoints").innerHTML = score;
-                            quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
+                         var quizName, quizScore, points, yourAnswer;
+                         var rTable = quizResults.document.getElementById("resultTable");
+                         for(let i = 0; i < pointsArray.length; i++) {
+                             quizName = result.quizName;
+                             quizScore = score;
+                             points = pointsArray[i];
+
+                             var rRow = document.createElement("tr");
+                             var item1, item2, item3;
+                             item1 = document.createElement("td");
+                             item2 = document.createElement("td");
+                             item3 = document.createElement("td");
+
+                             item1.innerHTML = (i+1);
+                             item2.innerHTML = answer[i];
+                             item3.innerHTML = points;
+
+                             rRow.appendChild(item1);
+                             rRow.appendChild(item2);
+                             rRow.appendChild(item3);
+                             rTable.appendChild(rRow); 
                          }
 
                          addNewScore(USER_EMAIL, result.quizName, score);
+                         quizPage.close();
                         
                     });
                     });                   
@@ -898,16 +984,31 @@ if (btnMath1) {
                             var pointsArray = getPointsPerQuestion(answer, result);
                         
                             //output results
-                            for(let i =0; i < questionCount; i++){
-                            quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
-                            quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
-                            quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
-                            quizResults.document.getElementById("totalPoints").innerHTML = score;
-                            quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
-                            }
+                            var quizName, quizScore, points, yourAnswer;
+                         var rTable = quizResults.document.getElementById("resultTable");
+                         for(let i = 0; i < pointsArray.length; i++) {
+                             quizName = result.quizName;
+                             quizScore = score;
+                             points = pointsArray[i];
 
-                            addNewScore(USER_EMAIL, result.quizName, score);
-                        
+                             var rRow = document.createElement("tr");
+                             var item1, item2, item3;
+                             item1 = document.createElement("td");
+                             item2 = document.createElement("td");
+                             item3 = document.createElement("td");
+
+                             item1.innerHTML = (i+1);
+                             item2.innerHTML = answer[i];
+                             item3.innerHTML = points;
+
+                             rRow.appendChild(item1);
+                             rRow.appendChild(item2);
+                             rRow.appendChild(item3);
+                             rTable.appendChild(rRow); 
+                         }
+
+                         addNewScore(USER_EMAIL, result.quizName, score);
+                         quizPage.close();
                     });
                     });
                 });
@@ -1044,16 +1145,31 @@ if (btnMath2) {
                             var pointsArray = getPointsPerQuestion(answer, result);
                         
                             //output results
-                            for(let i =0; i < questionCount; i++){
-                            quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
-                            quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
-                            quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
-                            quizResults.document.getElementById("totalPoints").innerHTML = score;
-                            quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
-                            }
+                            var quizName, quizScore, points, yourAnswer;
+                         var rTable = quizResults.document.getElementById("resultTable");
+                         for(let i = 0; i < pointsArray.length; i++) {
+                             quizName = result.quizName;
+                             quizScore = score;
+                             points = pointsArray[i];
 
-                            addNewScore(USER_EMAIL, result.quizName, score);
-                        
+                             var rRow = document.createElement("tr");
+                             var item1, item2, item3;
+                             item1 = document.createElement("td");
+                             item2 = document.createElement("td");
+                             item3 = document.createElement("td");
+
+                             item1.innerHTML = (i+1);
+                             item2.innerHTML = answer[i];
+                             item3.innerHTML = points;
+
+                             rRow.appendChild(item1);
+                             rRow.appendChild(item2);
+                             rRow.appendChild(item3);
+                             rTable.appendChild(rRow); 
+                         }
+
+                         addNewScore(USER_EMAIL, result.quizName, score);
+                         quizPage.close();
                     });
                     });
                     
@@ -1177,21 +1293,45 @@ if (btnEngineering1) {
                          var pointsArray = getPointsPerQuestion(answer, result);
                         
                          //output results
-                         for(let i =0; i < questionCount; i++){
-                            quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
-                            quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
-                            quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
-                            quizResults.document.getElementById("totalPoints").innerHTML = score;
-                            quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
+                        //  for(let i =0; i < questionCount; i++){
+                        //     quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
+                        //     quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
+                        //     quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
+                        //     quizResults.document.getElementById("totalPoints").innerHTML = score;
+                        //     quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
+                        //  }
+                         var quizName, quizScore, points, yourAnswer;
+                         var rTable = quizResults.document.getElementById("resultTable");
+                         for(let i = 0; i < pointsArray.length; i++) {
+                             quizName = result.quizName;
+                             quizScore = score;
+                             points = pointsArray[i];
+
+                             var rRow = document.createElement("tr");
+                             var item1, item2, item3;
+                             item1 = document.createElement("td");
+                             item2 = document.createElement("td");
+                             item3 = document.createElement("td");
+
+                             item1.innerHTML = (i+1);
+                             item2.innerHTML = answer[i];
+                             item3.innerHTML = points;
+
+                             rRow.appendChild(item1);
+                             rRow.appendChild(item2);
+                             rRow.appendChild(item3);
+                             rTable.appendChild(rRow); 
                          }
+
                          addNewScore(USER_EMAIL, result.quizName, score);
-                        
+                         quizPage.close();
                     });
                     });
 
                 });
 
                 modal.style.display = "none";
+                
             });
             
             btnCancel1.addEventListener("click", function() {
@@ -1212,7 +1352,6 @@ function getScore(answerList, result){
     for(let i =0; i < Object.keys(result.quizQuestions).length; i++){
         if (answerList[i] == result.quizQuestions[i].answer ){
             userPoints += parseInt(result.quizQuestions[i].value);
-            console.log(userPoints);
         }
         //calculate score
         //console.log(result.totalPoints);
