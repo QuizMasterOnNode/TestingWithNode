@@ -110,13 +110,23 @@ setTimeout(() => {
         console.log("user status changed:, ", user);
         if (user) {
             sessionStorage.setItem("email", user.email);
+            if(sessionStorage.getItem("displayName") == null){
+                // Calling function to retrieve the display name of the user to display on home page.
+                fetchUserDisplayName(sessionStorage.getItem("email")).then(function (result) {
+                    // setting up the displayName to display to home page.
+                    sessionStorage.setItem("displayName", result.display_name);
+                    // Inserting display name to home page.
+                    if(document.querySelector(".welcome")){
+                        document.querySelector(".welcome").innerHTML = ", "+ sessionStorage.getItem("displayName");
+                    }
+                });
+            }else{
+                if(document.querySelector(".welcome")){
+                    document.querySelector(".welcome").innerHTML = ", "+ sessionStorage.getItem("displayName");
+                }
+            }
             // Will set up the menu bar options.
             setupUserUI(user);
-            // Inserting display name to home page.
-            if(document.querySelector(".welcome")){
-                //alert(sessionStorage.getItem("displayName"));
-                document.querySelector(".welcome").innerHTML = ", "+ sessionStorage.getItem("displayName");
-            }
         } else {
             setupUserUI(null);
         }
