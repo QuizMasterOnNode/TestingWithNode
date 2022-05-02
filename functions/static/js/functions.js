@@ -272,6 +272,8 @@ if (btnHistory1) {
                              rTable.appendChild(rRow); 
                          }
 
+                         quizResults.document.getElementById("qName").innerHTML = result.quizName;
+                         quizResults.document.getElementById("qScore").innerHTML = score;
                          addNewScore(USER_EMAIL, result.quizName, score);
                          quizPage.close();
                     });
@@ -418,9 +420,11 @@ if (btnHistory2) {
                              rRow.appendChild(item3);
                              rTable.appendChild(rRow); 
                          }
-
+                         quizResults.document.getElementById("qName").innerHTML = result.quizName;
+                         quizResults.document.getElementById("qScore").innerHTML = score;
                          addNewScore(USER_EMAIL, result.quizName, score);
                          quizPage.close();
+                         
                         
                     });
                     });
@@ -565,8 +569,11 @@ if (btnScience1) {
                              rTable.appendChild(rRow); 
                          }
 
+                         quizResults.document.getElementById("qName").innerHTML = result.quizName;
+                         quizResults.document.getElementById("qScore").innerHTML = score;
                          addNewScore(USER_EMAIL, result.quizName, score);
                          quizPage.close();
+                         
                         
                         });
                     });
@@ -713,8 +720,11 @@ if (btnScience2) {
                              rTable.appendChild(rRow); 
                          }
 
+                         quizResults.document.getElementById("qName").innerHTML = result.quizName;
+                         quizResults.document.getElementById("qScore").innerHTML = score;
                          addNewScore(USER_EMAIL, result.quizName, score);
                          quizPage.close();
+                        
                         
                     });
                     });
@@ -859,7 +869,8 @@ if (btnEngineering2) {
                              rRow.appendChild(item3);
                              rTable.appendChild(rRow); 
                          }
-
+                         quizResults.document.getElementById("qName").innerHTML = result.quizName;
+                         quizResults.document.getElementById("qScore").innerHTML = score;
                          addNewScore(USER_EMAIL, result.quizName, score);
                          quizPage.close();
                         
@@ -1006,6 +1017,8 @@ if (btnMath1) {
                              rRow.appendChild(item3);
                              rTable.appendChild(rRow); 
                          }
+                         quizResults.document.getElementById("qName").innerHTML = result.quizName;
+                         quizResults.document.getElementById("qScore").innerHTML = score;
 
                          addNewScore(USER_EMAIL, result.quizName, score);
                          quizPage.close();
@@ -1167,6 +1180,8 @@ if (btnMath2) {
                              rRow.appendChild(item3);
                              rTable.appendChild(rRow); 
                          }
+                         quizResults.document.getElementById("qName").innerHTML = result.quizName;
+                         quizResults.document.getElementById("qScore").innerHTML = score;
 
                          addNewScore(USER_EMAIL, result.quizName, score);
                          quizPage.close();
@@ -1322,6 +1337,8 @@ if (btnEngineering1) {
                              rRow.appendChild(item3);
                              rTable.appendChild(rRow); 
                          }
+                         quizResults.document.getElementById("qName").innerHTML = result.quizName;
+                         quizResults.document.getElementById("qScore").innerHTML = score;
 
                          addNewScore(USER_EMAIL, result.quizName, score);
                          quizPage.close();
