@@ -36,15 +36,31 @@ async function createScore(client, email, quizName, quizScore) {
     const cursor = await client.db("Quiz-Capstone" ).collection("Student").find({studentEmail: email});
     //Cursor is returned, turn to array and then retrieve the first (and only) elements from the array.
     const allValues = await cursor.toArray();
-    var scores = allValues[0].scores;
-    //Create a new score object. The date object is created so that ISO time will be stored in Mongo
-    var newScore = {
-    quiz: quizName,
-    dateTaken: new Date(),
-    score: parseFloat(quizScore)}
-    scores.push(newScore);
-    //Update student with the new array.
-    const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: email}, {$set: {"scores": scores}});
+    if(allValues[0].scores)
+    {
+        var scores = allValues[0].scores;
+        //Create a new score object. The date object is created so that ISO time will be stored in Mongo
+        var newScore = {
+        quiz: quizName,
+        dateTaken: new Date(),
+        score: parseFloat(quizScore)}
+        scores.push(newScore);
+        //Update student with the new array.
+        const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: email}, {$set: {"scores": scores}});
+    
+    }
+    else {
+        var scores = [];
+        var newScore = {
+            quiz: quizName,
+            dateTaken: new Date(),
+            score: parseFloat(quizScore)}
+            scores.push(newScore);
+            //Update student with the new array.
+            const test = await client.db("Quiz-Capstone").collection("Student").updateOne({studentEmail: email}, {$set: {"scores": scores}});
+    
+        
+    }
     
 }
 
