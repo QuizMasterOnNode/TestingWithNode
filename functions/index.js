@@ -231,25 +231,6 @@ app.get("/qResults", (req, res) => {
         res.send(`${JSON.stringify(result)}`);
     });
 });
-//test
-//var userModel = require('./models/user/user.model.server');
-//userModel.createUser({
-    //    username:'cortez', password: 'cortez'
-    //});
-    //var userService = require('./models/services/user.service.server');
-    //userService(app);
-   /* var submissionModel = require('./models/submission/submission.model.server');
-    submissionModel.createSubmission({
-     //   const result = await client.db("Quiz-Capstone").collection("submission").findAllSubmissionsForStudent({username: newListing});
-        dateTaken:dateTime
-        username:
-    }); */ /*
-    var Submission = require('./models/services/submission.service.server');
-    Submission(app);
-    //app.listen(3000)*/
-
-    //refrencing submission paths -Cortez
-    
-  
+ 
 // https request
 exports.app = functions.https.onRequest(app);
