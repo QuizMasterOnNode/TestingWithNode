@@ -871,6 +871,7 @@ if (btnEngineering2) {
                          }
                          quizResults.document.getElementById("qName").innerHTML = result.quizName;
                          quizResults.document.getElementById("qScore").innerHTML = score;
+
                          addNewScore(USER_EMAIL, result.quizName, score);
                          quizPage.close();
                         
@@ -1137,10 +1138,10 @@ if (btnMath2) {
                     sbDiv.appendChild(submitButton);
                     quizPage.document.getElementById("quizForm").appendChild(sbDiv);
 
-                    //add submit event handler
+                    //this section handles the submit event handler
                     quizPage.document.querySelector("#btnSubmit").addEventListener("click", function(){
-
-                        let quizResults = window.open("quizResult.html");
+        
+                        let quizResults = window.open("quizTestResults.html");
                         quizResults.addEventListener("DOMContentLoaded", () => {
                         //find which buttons are selected    
                         var answer =[] ;
@@ -1152,40 +1153,69 @@ if (btnMath2) {
                                 }     
                             }
                         
-                            }
-                        //get score
-                            var score = getScore(answer, result);
-                            var pointsArray = getPointsPerQuestion(answer, result);
-                        
-                            //output results
-                            var quizName, quizScore, points, yourAnswer;
-                         var rTable = quizResults.document.getElementById("resultTable");
-                         for(let i = 0; i < pointsArray.length; i++) {
-                             quizName = result.quizName;
-                             quizScore = score;
-                             points = pointsArray[i];
-
-                             var rRow = document.createElement("tr");
-                             var item1, item2, item3;
-                             item1 = document.createElement("td");
-                             item2 = document.createElement("td");
-                             item3 = document.createElement("td");
-
-                             item1.innerHTML = (i+1);
-                             item2.innerHTML = answer[i];
-                             item3.innerHTML = points;
-
-                             rRow.appendChild(item1);
-                             rRow.appendChild(item2);
-                             rRow.appendChild(item3);
-                             rTable.appendChild(rRow); 
                          }
-                         quizResults.document.getElementById("qName").innerHTML = result.quizName;
-                         quizResults.document.getElementById("qScore").innerHTML = score;
+                        //get score
+                         var score = getScore(answer, result);
+                         var pointsArray = getPointsPerQuestion(answer, result);
+                        
 
+
+                         //this section dynamically creats first questionblock for heading and total score on the results page
+                        var questionBlock = document.createElement("div");
+                        questionBlock.id= "questionBlock";
+
+
+                        var quizName = document.createElement("h3");
+                        quizName.id = "quizName";
+                        quizName.innerHTML = result.quizName + " Quiz";
+                        var totalPoints = document.createElement("section");
+                        totalPoints.id= "totalPoints";
+                        
+                         totalPoints.innerHTML = score;
+
+                        questionBlock.appendChild(quizName);
+                        questionBlock.appendChild(totalPoints);
+
+                        quizResults.document.getElementById("resultBox").appendChild(questionBlock);
+
+
+
+                         //dynamicallly create questionBlocks for each question 
+                        for(let i= 0; i<questionCount; i++){
+                            
+
+                            //create questionblock
+                            var questionBlock = document.createElement("div");
+                            questionBlock.id = "questionBlock";
+                            
+
+                            var question = document.createElement("p");
+                            question.innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
+                           
+
+
+                            var userAnswer = document.createElement("p");
+                            userAnswer.id = "userAnswer";
+                            userAnswer.innerHTML= "Your Answer: " + answer[i];
+                            
+
+                            var points =document.createElement("div");
+                            points.id = "points";
+                            points.innerHTML = pointsArray[i];
+                            
+
+                            questionBlock.appendChild(question);
+                            questionBlock.appendChild(userAnswer);
+                            questionBlock.appendChild(points);
+
+                            quizResults.document.getElementById("resultBox").appendChild(questionBlock);
+
+                        }
+
+                        //add score to database
                          addNewScore(USER_EMAIL, result.quizName, score);
-                         quizPage.close();
                     });
+                    quizPage.close();
                     });
                     
                 });
@@ -1287,10 +1317,10 @@ if (btnEngineering1) {
                     sbDiv.appendChild(submitButton);
                     quizPage.document.getElementById("quizForm").appendChild(sbDiv);
 
-                    //add submit event handler
+                    //this section handles the submit event handler
                     quizPage.document.querySelector("#btnSubmit").addEventListener("click", function(){
         
-                        let quizResults = window.open("quizResult.html");
+                        let quizResults = window.open("quizTestResults.html");
                         quizResults.addEventListener("DOMContentLoaded", () => {
                         //find which buttons are selected    
                         var answer =[] ;
@@ -1307,42 +1337,65 @@ if (btnEngineering1) {
                          var score = getScore(answer, result);
                          var pointsArray = getPointsPerQuestion(answer, result);
                         
-                         //output results
-                        //  for(let i =0; i < questionCount; i++){
-                        //     quizResults.document.getElementById("quizName").innerHTML = result.quizName + " Quiz";
-                        //     quizResults.document.getElementById("userAnswer" + (i+1) ).innerHTML= "Your Answer: " + answer[i];
-                        //     quizResults.document.getElementById("question" + (i+1)).innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
-                        //     quizResults.document.getElementById("totalPoints").innerHTML = score;
-                        //     quizResults.document.getElementById("points"+ (i+1)).innerHTML = pointsArray[i];
-                        //  }
-                         var quizName, quizScore, points, yourAnswer;
-                         var rTable = quizResults.document.getElementById("resultTable");
-                         for(let i = 0; i < pointsArray.length; i++) {
-                             quizName = result.quizName;
-                             quizScore = score;
-                             points = pointsArray[i];
 
-                             var rRow = document.createElement("tr");
-                             var item1, item2, item3;
-                             item1 = document.createElement("td");
-                             item2 = document.createElement("td");
-                             item3 = document.createElement("td");
 
-                             item1.innerHTML = (i+1);
-                             item2.innerHTML = answer[i];
-                             item3.innerHTML = points;
+                         //this section dynamically creats first questionblock for heading and total score on the results page
+                        var questionBlock = document.createElement("div");
+                        questionBlock.id= "questionBlock";
 
-                             rRow.appendChild(item1);
-                             rRow.appendChild(item2);
-                             rRow.appendChild(item3);
-                             rTable.appendChild(rRow); 
-                         }
-                         quizResults.document.getElementById("qName").innerHTML = result.quizName;
-                         quizResults.document.getElementById("qScore").innerHTML = score;
 
+                        var quizName = document.createElement("h3");
+                        quizName.id = "quizName";
+                        quizName.innerHTML = result.quizName + " Quiz";
+                        var totalPoints = document.createElement("section");
+                        totalPoints.id= "totalPoints";
+                        
+                         totalPoints.innerHTML = score;
+
+                        questionBlock.appendChild(quizName);
+                        questionBlock.appendChild(totalPoints);
+
+                        quizResults.document.getElementById("resultBox").appendChild(questionBlock);
+
+
+
+                         //dynamicallly create questionBlocks for each question 
+                        for(let i= 0; i<questionCount; i++){
+                            
+
+                            //create questionblock
+                            var questionBlock = document.createElement("div");
+                            questionBlock.id = "questionBlock";
+                            
+
+                            var question = document.createElement("p");
+                            question.innerHTML = "Question " + (i+1) + ":" + result.quizQuestions[i].question;
+                           
+
+
+                            var userAnswer = document.createElement("p");
+                            userAnswer.id = "userAnswer";
+                            userAnswer.innerHTML= "Your Answer: " + answer[i];
+                            
+
+                            var points =document.createElement("div");
+                            points.id = "points";
+                            points.innerHTML = pointsArray[i];
+                            
+
+                            questionBlock.appendChild(question);
+                            questionBlock.appendChild(userAnswer);
+                            questionBlock.appendChild(points);
+
+                            quizResults.document.getElementById("resultBox").appendChild(questionBlock);
+
+                        }
+
+                        //add score to database
                          addNewScore(USER_EMAIL, result.quizName, score);
-                         quizPage.close();
+                         
                     });
+                    quizPage.close();
                     });
 
                 });
