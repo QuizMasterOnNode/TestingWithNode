@@ -33,41 +33,16 @@ p{
     padding-left:50px;
 
 }
-#question1 {
+#title{
+    font-weight: bold;
+    padding-bottom:3px;
+}
+#question {
     font-weight: bold;
     padding-bottom:3px;
 
 }
-#question2 {
-    font-weight: bold;
-    padding-bottom:3px;
 
-}
-#question3 {
-    font-weight: bold;
-    padding-bottom:3px;
-
-}
-#question4 {
-    font-weight: bold;
-    padding-bottom:3px;
-
-}
-#question5 {
-    font-weight: bold;
-    padding-bottom:3px;
-
-}
-#question6{
-    font-weight: bold;
-    padding-bottom:3px;
-
-}
-#question7 {
-    font-weight: bold;
-    padding-bottom:3px;
-
-}
 #questionBlock{
     padding-bottom: 20px;
     padding-top: 10px;
@@ -75,7 +50,7 @@ p{
     border-bottom: solid 2px #388087;
     height: 100px;
 }
-#points1{
+#points{
     text-align: center;
     font-weight: bold;
     border: solid 1px;
