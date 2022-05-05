@@ -19,3 +19,5 @@ Videos 1,3, and 11-13 from the playlist are very helpful for this portion.
 
 # Set up Firebase Deployment
 Deployment must be node deployment and not a static deployment. Youtube tutorial used for this portion: https://www.youtube.com/watch?v=AgyO1a0FnWA&ab_channel=khabanh. 
+
+- A Blaze account is required for node deployment. It is very unlikely for a small scaled project to be charged using this method. 
