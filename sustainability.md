@@ -13,5 +13,9 @@ QuizMaster is using a private firebase account for firebase authentication and d
 the configuration object for firebase authentication must be changed for lines 11-18 of authentication.js. 
 This includes the new apiKey, authDomain, projectId, storage bucket, messaginSenderId, and appId.
 
+Set up firebase: https://www.youtube.com/playlist?list=PL4cUxeGkcC9jERUGvbudErNCeSZHWUVlb
+
+Videos 1,3, and 11-13 from the playlist are very helpful for this portion.
+
 # Set up Firebase Deployment
 Deployment must be node deployment and not a static deployment. Youtube tutorial used for this portion: https://www.youtube.com/watch?v=AgyO1a0FnWA&ab_channel=khabanh. 
